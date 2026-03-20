@@ -1,0 +1,9 @@
+This package keeps the same root structure as the version that worked:
+- index.html
+- package.json
+- netlify.toml
+- README.txt
+- netlify/functions/*.mjs
+
+Use a NEW Netlify site or NEW GitHub repo.
+If uploading through GitHub browser, upload root files first, then upload function files from inside netlify/functions to preserve folders.
