@@ -1,0 +1,2 @@
+import { bad, json, requireAuth, getData } from "./_lib.mjs";
+export default async (request) => { const auth=requireAuth(request); if(auth.error) return bad(auth.error, auth.status||401); return json(await getData()); };

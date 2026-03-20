@@ -1,0 +1,2 @@
+import { json, requireAuth, bad } from "./_lib.mjs";
+export default async (request) => { const auth=requireAuth(request); if(auth.error) return bad(auth.error, auth.status||401); return json({ok:true, username: auth.session.username}); };
