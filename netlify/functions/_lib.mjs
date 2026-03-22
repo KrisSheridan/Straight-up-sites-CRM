@@ -56,6 +56,8 @@ export function normalizeContact(input = {}) {
     mobile: String(input.mobile || "").trim(),
     landline: String(input.landline || "").trim(),
     email: String(input.email || "").trim(),
+    probability: String(input.probability || "").trim(),
+    sold: !!input.sold,
     nextActionDate: String(input.nextActionDate || "").trim(),
     instagram: String(input.instagram || "").trim(),
     facebook: String(input.facebook || "").trim(),
