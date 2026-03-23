@@ -59,6 +59,8 @@ export function normalizeContact(input = {}) {
     probability: String(input.probability || "").trim(),
     sold: !!input.sold,
     nextActionDate: String(input.nextActionDate || "").trim(),
+    websiteUrl: String(input.websiteUrl || "").trim(),
+    subscription: String(input.subscription || "").trim(),
     instagram: String(input.instagram || "").trim(),
     facebook: String(input.facebook || "").trim(),
     tiktok: String(input.tiktok || "").trim(),
