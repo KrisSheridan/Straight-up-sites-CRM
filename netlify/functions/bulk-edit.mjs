@@ -14,9 +14,11 @@ export default async (request) => {
     if (body.landline) { c.landline = String(body.landline).trim(); changed = true; }
     if (body.email) { c.email = String(body.email).trim(); changed = true; }
     if (body.probability !== undefined && body.probability !== "") { c.probability = String(body.probability).trim(); changed = true; }
+    if (body.websiteUrl !== undefined && body.websiteUrl !== "") { c.websiteUrl = String(body.websiteUrl).trim(); changed = true; }
+    if (body.subscription !== undefined && body.subscription !== "") { c.subscription = String(body.subscription).trim(); changed = true; }
     if (body.sold !== undefined && body.sold !== null) { c.sold = !!body.sold; changed = true; }
     if (changed) addNote(c, "note", "Bulk edit applied.");
   }
   await saveData(data);
-  return json({ contacts: data.contacts, templates: data.templates });
+  return json({ contacts: data.contacts, templates: data.templates, updated: ids.length });
 };
