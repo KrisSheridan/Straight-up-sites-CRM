@@ -5,70 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Straight Up Sites CRM</title>
 <style>
-:root{--bg:#081022;--panel:#101a34;--panel2:#162247;--line:#25345f;--text:#eef3ff;--muted:#9eb0d8;--accent:#6d9eff;--accent2:#80adff;--danger:#ef646b;--success:#2bc47d;--shadow:0 12px 32px rgba(0,0,0,.25)}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#07101f 0%,#091328 100%);color:var(--text);min-height:100vh}
+:root{
+  --bg:#0b1730;--bg2:#0f1e3c;--panel:#132449;--panel2:#1b3160;--line:#35538e;
+  --text:#f2f6ff;--muted:#b6c7ee;--accent:#7fb0ff;--accent2:#5f98ff;--accent3:#9dc0ff;
+  --gold:#d4a940;--gold2:#f1c862;--danger:#ef646b;--success:#2bc47d;--shadow:0 14px 34px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,var(--bg) 0%,#0d1a36 100%);color:var(--text);min-height:100vh}
 .hidden{display:none!important} a{text-decoration:none;color:inherit}
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-.sidebar{background:rgba(6,12,24,.96);border-right:1px solid var(--line);padding:18px 14px;position:sticky;top:0;height:100vh}
-.brand{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,rgba(109,158,255,.14),rgba(109,158,255,.06));border:1px solid rgba(128,173,255,.16);padding:14px;border-radius:22px;margin-bottom:18px}
-.brand-badge{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#5d8eff);font-weight:800;font-size:18px}
-.brand-title{font-size:17px;font-weight:800}.brand-sub{color:var(--muted);margin-top:4px;font-size:12px;line-height:1.4}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:100vh}
+.sidebar{background:rgba(8,16,32,.96);border-right:1px solid rgba(127,176,255,.18);padding:18px 12px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,rgba(127,176,255,.14),rgba(212,169,64,.08));border:1px solid rgba(127,176,255,.2);padding:14px;border-radius:24px;margin-bottom:18px}
+.brand-logo{width:58px;height:58px;border-radius:18px;object-fit:cover;display:block;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.brand-title{font-size:17px;font-weight:800;line-height:1.15}.brand-sub{color:var(--muted);margin-top:6px;font-size:12px;line-height:1.35}
 .navbtn{width:100%;text-align:left;background:transparent;color:var(--muted);border:1px solid transparent;border-radius:18px;padding:14px 16px;font-size:16px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:10px}
-.navbtn.active,.navbtn:hover{background:rgba(109,158,255,.12);color:#fff;border-color:rgba(128,173,255,.18)}
-.main{padding:26px 28px}.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.navbtn.active,.navbtn:hover{background:rgba(127,176,255,.13);color:#fff;border-color:rgba(127,176,255,.2)}
+.main{padding:24px 28px}.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
 .title h1{margin:0;font-size:56px;line-height:1}.title p{margin:12px 0 0;color:var(--muted);font-size:18px}.toolbar{display:flex;gap:12px;flex-wrap:wrap}
-.btn{border:none;border-radius:18px;padding:14px 22px;font-weight:700;font-size:16px;background:var(--panel2);color:#fff;cursor:pointer;border:1px solid var(--line)}
-.btn:hover{filter:brightness(1.06)} .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}.btn-danger{background:linear-gradient(135deg,#de5560,var(--danger));border-color:transparent}.btn-success{background:linear-gradient(135deg,#1ea96c,#2bc47d);border-color:transparent}.btn-ghost{background:transparent}
-.card{background:rgba(16,26,52,.96);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}
-.notice{padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:#0f1730;color:var(--muted);margin-bottom:14px}
-.contacts-card{overflow:hidden}
-.contacts-head{padding:26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{border:none;border-radius:18px;padding:14px 22px;font-weight:700;font-size:16px;background:var(--panel2);color:#fff;cursor:pointer;border:1px solid rgba(127,176,255,.16);box-shadow:0 2px 0 rgba(255,255,255,.02) inset}
+.btn:hover{filter:brightness(1.07)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));border-color:transparent;color:#1b1300}
+.btn-danger{background:linear-gradient(135deg,#e25a64,var(--danger));border-color:transparent}
+.btn-success{background:linear-gradient(135deg,#27b471,var(--success));border-color:transparent}.btn-ghost{background:transparent}
+.card{background:rgba(19,36,73,.96);border:1px solid rgba(127,176,255,.16);border-radius:28px;box-shadow:var(--shadow)}
+.notice{padding:12px 14px;border:1px solid rgba(127,176,255,.16);border-radius:16px;background:#122247;color:var(--muted);margin-bottom:14px}
+.contacts-card{overflow:hidden}.contacts-head{padding:26px;border-bottom:1px solid rgba(127,176,255,.14);display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}
 .contacts-head h2{margin:0;font-size:22px}.contacts-head p{margin:6px 0 0;color:var(--muted)}
-.searchbox{min-width:320px;max-width:500px;width:100%;background:#111b37;border:1px solid var(--line);border-radius:18px;padding:14px 16px;color:#fff;font-size:16px}
-.import-help{margin:16px 26px 0;padding:14px 16px;background:#0f1730;border:1px solid var(--line);border-radius:16px;color:var(--muted)}
+.searchbox{min-width:320px;max-width:500px;width:100%;background:#122247;border:1px solid rgba(127,176,255,.16);border-radius:18px;padding:14px 16px;color:#fff;font-size:16px}
+.import-help{margin:16px 26px 0;padding:14px 16px;background:#122247;border:1px solid rgba(127,176,255,.16);border-radius:16px;color:var(--muted)}
 .column-toggles{display:flex;flex-wrap:wrap;gap:10px;padding:16px 26px 8px}
-.check{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#111b37;font-size:14px}
-.check input{width:auto}
+.check{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(127,176,255,.16);border-radius:999px;background:#122247;font-size:14px}.check input{width:auto}
 .bulk-actions{display:flex;gap:10px;flex-wrap:wrap;padding:8px 26px 16px}
 .table-wrap{overflow:auto}
 table{width:100%;border-collapse:collapse}
-th,td{padding:18px 18px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th,td{padding:18px 18px;border-bottom:1px solid rgba(127,176,255,.14);text-align:left;vertical-align:top}
 th{color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;position:relative}
 .name-link{font-weight:800;color:#fff;cursor:pointer}.small{font-size:13px;color:var(--muted)}
 .header-cell{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.header-menu-btn{border:none;background:transparent;color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px}
-.header-menu{position:absolute;top:48px;right:10px;background:#0f1730;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);z-index:30;min-width:210px;padding:10px}
+.header-menu-btn{border:none;background:transparent;color:var(--accent3);font-size:16px;cursor:pointer;padding:0 4px}
+.header-menu{position:absolute;top:48px;right:10px;background:#122247;border:1px solid rgba(127,176,255,.16);border-radius:14px;box-shadow:var(--shadow);z-index:30;min-width:220px;padding:10px}
 .header-menu .menu-title{font-size:12px;color:var(--muted);margin:4px 0 8px}
 .menu-btn{width:100%;text-align:left;padding:10px 12px;border:none;border-radius:10px;background:transparent;color:#fff;cursor:pointer}
-.menu-btn:hover{background:#162247}
-.menu-sep{height:1px;background:var(--line);margin:8px 0}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
-.stat{padding:16px 18px}.stat .k{color:var(--muted);font-size:13px}.stat .v{font-size:22px;font-weight:800;margin-top:12px}
+.menu-btn:hover{background:#1b3160}.menu-sep{height:1px;background:rgba(127,176,255,.16);margin:8px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}.stat{padding:14px 16px}.stat .k{color:var(--muted);font-size:12px}.stat .v{font-size:22px;font-weight:800;margin-top:10px}
 .page-card{padding:28px}.section-title{margin:0 0 8px;font-size:28px}.sub{color:var(--muted);margin:0 0 18px}
-.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px}.field .label{font-size:13px;color:var(--muted);margin-bottom:8px}
-.box{min-height:52px;background:#0f1730;border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;align-items:center}
-.socials{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
-.compose{background:#0f1730;border:1px solid var(--line);border-radius:18px;padding:16px;margin:18px 0}
-input,select,textarea{width:100%;background:#0f1730;color:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;font-size:15px;outline:none}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.field .label{font-size:13px;color:var(--muted);margin-bottom:8px;display:block}
+input,select,textarea{width:100%;background:#122247;color:#fff;border:1px solid rgba(127,176,255,.16);border-radius:16px;padding:14px 16px;font-size:15px;outline:none}
 input[type="date"]{color-scheme:dark} input[type="checkbox"]{width:auto}
-textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.notes-list{margin-top:14px}
-.note{background:#0f1730;border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:10px}.note-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
-.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px}.login-card{width:min(450px,100%);padding:28px;border-radius:28px;background:rgba(16,26,52,.96);border:1px solid var(--line);box-shadow:var(--shadow)}
-.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}.login-sq{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:800;font-size:18px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.58);padding:18px;overflow:auto;z-index:100}.modal-card{max-width:860px;margin:22px auto;padding:28px}
-.template-item{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:18px;background:#0f1730;margin-bottom:12px}
+textarea{resize:vertical;min-height:120px}
+.notes-list{margin-top:14px}.note{background:#122247;border:1px solid rgba(127,176,255,.16);border-radius:18px;padding:14px 16px;margin-bottom:10px}.note-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px}.login-card{width:min(450px,100%);padding:28px;border-radius:28px;background:rgba(19,36,73,.96);border:1px solid rgba(127,176,255,.16);box-shadow:var(--shadow)}
+.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}.login-logo{width:56px;height:56px;border-radius:16px;object-fit:cover}
+.mobile-top,.overlay{display:none}.hamburger{background:transparent;color:#fff;border:1px solid rgba(127,176,255,.16);border-radius:14px;padding:10px 12px}
+.pct-wrap{position:relative}.pct-wrap .pct-suffix{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.template-item{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px;border:1px solid rgba(127,176,255,.16);border-radius:18px;background:#122247;margin-bottom:12px}
 .template-name{font-weight:800;font-size:18px}.template-body{white-space:pre-wrap;color:#d6e2ff;margin-top:8px}
-.mobile-top,.overlay{display:none}.hamburger{background:transparent;color:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-@media (max-width:1100px){.actions{grid-template-columns:repeat(2,1fr)} .stats{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:860px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;z-index:80;transform:translateX(-100%);transition:.22s ease}.sidebar.open{transform:translateX(0)}.overlay.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:75}.mobile-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#081022;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:70}.main{padding:18px}.title h1{font-size:38px}.detail-grid,.socials,.form-grid,.actions,.stats{grid-template-columns:1fr}.searchbox{min-width:0;width:100%}}
+.dupe-list{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+.dupe-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+@media (max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:860px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;z-index:80;transform:translateX(-100%);transition:.22s ease}.sidebar.open{transform:translateX(0)}.overlay.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:75}.mobile-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#0b1730;border-bottom:1px solid rgba(127,176,255,.16);position:sticky;top:0;z-index:70}.main{padding:18px}.title h1{font-size:40px}.form-grid,.stats{grid-template-columns:1fr}.searchbox{min-width:0;width:100%}}
 </style>
 </head>
 <body>
 <div id="loginView" class="login-wrap">
   <div class="login-card">
-    <div class="login-brand"><div class="login-sq">SU</div><div><div style="font-size:22px;font-weight:800">Straight Up Sites CRM</div><div class="small">Live sync version</div></div></div>
+    <div class="login-brand">
+      <img src="logo.png" class="login-logo" alt="Straight Up Sites logo">
+      <div><div style="font-size:22px;font-weight:800">Straight Up Sites CRM</div><div class="small">Live sync version</div></div>
+    </div>
     <h1>Log in</h1>
-    <p>This version syncs contacts, notes, templates and activity through the server.</p>
+    <p>This version syncs contacts, templates and saved changes through the server.</p>
     <div style="display:grid;gap:12px">
       <div><div class="small" style="margin-bottom:6px">Username</div><input id="loginUser"></div>
       <div><div class="small" style="margin-bottom:6px">Password</div><input id="loginPass" type="password"></div>
@@ -76,13 +84,17 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
     </div>
   </div>
 </div>
+
 <div id="appView" class="hidden">
   <div class="mobile-top"><div style="font-weight:800">Straight Up Sites CRM</div><button class="hamburger" onclick="toggleSidebar()">☰</button></div><div id="overlay" class="overlay" onclick="closeSidebar()"></div>
   <div class="app">
     <aside id="sidebar" class="sidebar">
-      <div class="brand"><div class="brand-badge">SU</div><div><div class="brand-title">Straight Up Sites</div><div class="brand-sub">Contacts, notes and outreach</div></div></div>
+      <div class="brand">
+        <img src="logo.png" class="brand-logo" alt="Straight Up Sites logo">
+        <div><div class="brand-title">Straight Up Sites</div><div class="brand-sub">Contacts, notes and outreach</div></div>
+      </div>
       <button class="navbtn active" onclick="setPage('contacts', event)">👥 Contacts</button>
-      <button class="navbtn" onclick="setPage('customers', event)">✅ Existing Customers</button>
+      <button class="navbtn" onclick="setPage('existing', event)">✅ Existing Customers</button>
       <button class="navbtn" onclick="setPage('templates', event)">📝 Templates</button>
       <button class="navbtn" onclick="setPage('settings', event)">🔐 Settings</button>
       <button class="navbtn" onclick="logout()">↩ Log out</button>
@@ -90,7 +102,7 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
     <main class="main">
       <section id="page-contacts">
         <div class="topbar">
-          <div class="title"><h1 id="contactsPageTitle">Contacts</h1><p id="contactsPageSubtitle">Live sync CRM across devices.</p></div>
+          <div class="title"><h1>Contacts</h1><p>Live sync CRM across devices.</p></div>
           <div class="toolbar">
             <button class="btn btn-primary" onclick="openContactModal()">+ Add new contact</button>
             <button class="btn" onclick="document.getElementById('csvFile').click()">Bulk upload</button>
@@ -104,7 +116,7 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
             <div><h2>All contacts</h2><p>Click a business name to open the full account page.</p></div>
             <div><input id="searchInput" class="searchbox" placeholder="Search by business, number or email" oninput="renderContactsTable()"><input id="csvFile" type="file" accept=".csv" class="hidden" onchange="handleCsvUpload(event)"></div>
           </div>
-          <div class="import-help">Bulk upload allows missing fields and leaves them blank. Message logs now save either the exact content sent or a simple “Message sent”.</div>
+          <div class="import-help">Duplicate check now works across business name, number and email. Probability is saved as a whole-number %.</div>
           <div class="column-toggles">
             <label class="check"><input type="checkbox" id="colSelect" checked onchange="renderContactsTable()"> Select</label>
             <label class="check"><input type="checkbox" id="colBusiness" checked onchange="renderContactsTable()"> Business name</label>
@@ -127,50 +139,75 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
           <div class="card stat"><div class="k">Total contacts</div><div class="v" id="statContacts">0</div></div>
           <div class="card stat"><div class="k">WhatsApp logs</div><div class="v" id="statWA">0</div></div>
           <div class="card stat"><div class="k">Email logs</div><div class="v" id="statEmail">0</div></div>
-          <div class="card stat"><div class="k">SMS / calls / notes</div><div class="v" id="statOther">0</div></div>
+          <div class="card stat"><div class="k">SMS / calls</div><div class="v" id="statOther">0</div></div>
         </div>
       </section>
+
+      <section id="page-existing" class="hidden">
+        <div class="topbar">
+          <div class="title"><h1>Existing Customers</h1><p>Contacts marked as sold or with a subscription.</p></div>
+        </div>
+        <div class="card contacts-card">
+          <div class="table-wrap"><table><thead><tr><th>Business name</th><th>Main contact</th><th>Number</th><th>Subscription</th><th>Website URL</th></tr></thead><tbody id="existingTable"></tbody></table></div>
+        </div>
+      </section>
+
       <section id="page-account" class="hidden">
-        <div class="topbar"><div class="title"><h1 id="accountTitle">Account</h1><p>Contact details, notes and outreach actions.</p></div><div class="toolbar"><button class="btn" onclick="backToList()">Back to list</button><button class="btn" onclick="openContactModal(true)">Edit contact</button><button class="btn btn-danger" onclick="deleteCurrentContact()">Delete</button></div></div>
+        <div class="topbar">
+          <div class="title"><h1 id="accountTitle">Account</h1><p>Edit contact details, notes and outreach actions.</p></div>
+          <div class="toolbar">
+            <button class="btn" onclick="setPage('contacts')">Back to list</button>
+            <button class="btn btn-danger" onclick="deleteCurrentContact()">Delete</button>
+          </div>
+        </div>
         <div class="card page-card">
-          <h2 class="section-title">Contact details</h2><p class="sub">View saved information and optional social links.</p>
-          <div class="detail-grid">
-            <div class="field"><div class="label">Business name</div><div class="box" id="dBusiness"></div></div>
-            <div class="field"><div class="label">Main contact</div><div class="box" id="dMain"></div></div>
-            <div class="field"><div class="label">Mobile number</div><div class="box" id="dMobile"></div></div>
-            <div class="field"><div class="label">Landline number</div><div class="box" id="dLandline"></div></div>
-            <div class="field"><div class="label">Email address</div><div class="box" id="dEmail"></div></div>
-            <div class="field"><div class="label">Probability</div><div class="box" id="dProbability"></div></div>
-            <div class="field"><div class="label">Sales status</div><div class="box" id="dSold"></div></div>
-            <div class="field"><div class="label">Subscription</div><div class="box" id="dSubscription"></div></div>
-            <div class="field"><div class="label">Website URL</div><div class="box" id="dWebsiteUrl"></div></div>
-            <div class="field"><div class="label">Next action date</div><div class="box" id="dNextAction"></div></div>
+          <h2 class="section-title">Contact details</h2>
+          <p class="sub">All fields are editable here. Save changes keeps you on this contact.</p>
+          <div class="form-grid">
+            <div><div class="small" style="margin-bottom:6px">Business name</div><input id="aBusiness"></div>
+            <div><div class="small" style="margin-bottom:6px">Main contact</div><input id="aMain"></div>
+            <div><div class="small" style="margin-bottom:6px">Mobile number</div><input id="aMobile"></div>
+            <div><div class="small" style="margin-bottom:6px">Landline number</div><input id="aLandline"></div>
+            <div><div class="small" style="margin-bottom:6px">Email address</div><input id="aEmail"></div>
+            <div><div class="small" style="margin-bottom:6px">Probability</div><div class="pct-wrap"><input id="aProbability" oninput="formatPctInput(this)"><span class="pct-suffix">%</span></div></div>
+            <div><div class="small" style="margin-bottom:6px">Sales status</div><input id="aSalesStatus"></div>
+            <div><div class="small" style="margin-bottom:6px">Subscription</div><select id="aSubscription">
+              <option value="">Select subscription</option>
+              <option value="£0 No care">£0 No care</option>
+              <option value="£4.99 Basic care">£4.99 Basic care</option>
+              <option value="£9.99 Standard care">£9.99 Standard care</option>
+              <option value="£11.99 Standard care with domain">£11.99 Standard care with domain</option>
+            </select></div>
+            <div><div class="small" style="margin-bottom:6px">Website URL</div><input id="aWebsite"></div>
+            <div><div class="small" style="margin-bottom:6px">Next action date</div><input id="aNextAction" type="date" onclick="this.showPicker && this.showPicker()"></div>
+            <div><div class="small" style="margin-bottom:6px">Instagram URL</div><input id="aInstagram"></div>
+            <div><div class="small" style="margin-bottom:6px">Facebook URL</div><input id="aFacebook"></div>
+            <div><div class="small" style="margin-bottom:6px">TikTok URL</div><input id="aTikTok"></div>
+            <div><div class="small" style="margin-bottom:6px">X URL</div><input id="aX"></div>
           </div>
-          <div class="socials">
-            <div class="field"><div class="label">Instagram</div><div class="box" id="dInstagram"></div></div>
-            <div class="field"><div class="label">Facebook</div><div class="box" id="dFacebook"></div></div>
-            <div class="field"><div class="label">TikTok</div><div class="box" id="dTikTok"></div></div>
-            <div class="field"><div class="label">X</div><div class="box" id="dX"></div></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+            <label class="check"><input type="checkbox" id="aSold"> Mark as sold</label>
+            <button class="btn btn-primary" onclick="saveCurrentContact()">Save changes</button>
           </div>
-          <div class="actions">
+          <div class="actions" style="margin-top:20px">
             <button class="btn btn-success" onclick="sendLog('whatsapp')">Send WhatsApp</button>
             <button class="btn btn-primary" onclick="sendLog('sms')">Send SMS</button>
             <button class="btn" onclick="sendLog('email')">Send email</button>
-            <button class="btn" onclick="sendLog('call')">Call</button>
+            <button class="btn btn-gold" onclick="sendLog('call')">Call</button>
           </div>
           <div class="compose">
             <div class="form-grid">
               <div><div class="small" style="margin-bottom:6px">Preset message template</div><select id="templateSelect" onchange="applyTemplate()"></select></div>
-              <div><div class="small" style="margin-bottom:6px">Next action date</div><input id="nextActionInput" type="date" onclick="this.showPicker && this.showPicker()" onchange="saveNextActionDate()"></div>
+              <div><div class="small" style="margin-bottom:6px">Message / note text</div><textarea id="messageBox" placeholder="Type a message or free note here..."></textarea></div>
             </div>
-            <div style="margin-top:12px"><div class="small" style="margin-bottom:6px">Message / note text</div><textarea id="messageBox" placeholder="Type a message or free note here..."></textarea></div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button class="btn" onclick="addFreeNote()">Add note</button></div>
           </div>
           <div><h2 class="section-title" style="font-size:24px">Notes</h2><div id="notesList" class="notes-list"></div></div>
         </div>
       </section>
+
       <section id="page-templates" class="hidden">
-        <div class="topbar"><div class="title"><h1>Templates</h1><p>Create, name and edit message templates.</p></div></div>
+        <div class="topbar"><div class="title"><h1>Templates</h1><p>Create, edit and save message templates.</p></div></div>
         <div class="card page-card">
           <div class="form-grid">
             <div><div class="small" style="margin-bottom:6px">Template name</div><input id="tplName" placeholder="Example: First outreach"></div>
@@ -184,6 +221,7 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
         </div>
         <div style="margin-top:16px" id="templatesList"></div>
       </section>
+
       <section id="page-settings" class="hidden">
         <div class="topbar"><div class="title"><h1>Settings</h1><p>Server-backed login. Change credentials in Netlify environment variables.</p></div></div>
         <div class="card page-card" style="max-width:700px">
@@ -204,13 +242,16 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
       <div><div class="small" style="margin-bottom:6px">Mobile number</div><input id="fMobile"></div>
       <div><div class="small" style="margin-bottom:6px">Landline number</div><input id="fLandline"></div>
       <div><div class="small" style="margin-bottom:6px">Email address</div><input id="fEmail"></div>
-      <div><div class="small" style="margin-bottom:6px">Probability</div><input id="fProbability" placeholder="e.g. 80% or hot"></div>
+      <div><div class="small" style="margin-bottom:6px">Probability</div><div class="pct-wrap"><input id="fProbability" oninput="formatPctInput(this)"><span class="pct-suffix">%</span></div></div>
       <div><div class="small" style="margin-bottom:6px">Next action date</div><input id="fNextAction" type="date" onclick="this.showPicker && this.showPicker()"></div>
-      <div><div class="small" style="margin-bottom:6px">Sale confirmed</div><label class="check"><input id="fSold" type="checkbox"> Mark as sold</label></div>
-      <div><div class="small" style="margin-bottom:6px">Website URL</div><input id="fWebsiteUrl" placeholder="https://example.com"></div>
-      <div><div class="small" style="margin-bottom:6px">Subscription</div><select id="fSubscription"><option value="">Select subscription</option><option value="£0 No care">£0 No care</option><option value="£4.99 Basic care">£4.99 Basic care</option><option value="£9.99 standard care">£9.99 standard care</option><option value="£11.99 Standard care with domain">£11.99 Standard care with domain</option></select></div>
-    </div>
-    <div style="margin-top:16px" class="form-grid">
+      <div><div class="small" style="margin-bottom:6px">Website URL</div><input id="fWebsite"></div>
+      <div><div class="small" style="margin-bottom:6px">Subscription</div><select id="fSubscription">
+        <option value="">Select subscription</option>
+        <option value="£0 No care">£0 No care</option>
+        <option value="£4.99 Basic care">£4.99 Basic care</option>
+        <option value="£9.99 Standard care">£9.99 Standard care</option>
+        <option value="£11.99 Standard care with domain">£11.99 Standard care with domain</option>
+      </select></div>
       <div><div class="small" style="margin-bottom:6px">Instagram URL</div><input id="fInstagram"></div>
       <div><div class="small" style="margin-bottom:6px">Facebook URL</div><input id="fFacebook"></div>
       <div><div class="small" style="margin-bottom:6px">TikTok URL</div><input id="fTikTok"></div>
@@ -225,102 +266,264 @@ textarea{resize:vertical;min-height:140px}.form-grid{display:grid;grid-template-
     <div class="topbar" style="margin-bottom:18px"><div class="title"><h1 style="font-size:32px">Bulk edit contacts</h1><p>Only fields you fill in will be changed. Blank fields stay unchanged.</p></div><div class="toolbar"><button class="btn btn-ghost" onclick="closeBulkEditModal()">Close</button></div></div>
     <div class="form-grid">
       <div><div class="small" style="margin-bottom:6px">Next action date</div><input id="bulkNextAction" type="date" onclick="this.showPicker && this.showPicker()"></div>
-      <div><div class="small" style="margin-bottom:6px">Main contact</div><input id="bulkMain"></div>
-      <div><div class="small" style="margin-bottom:6px">Mobile number</div><input id="bulkMobile"></div>
-      <div><div class="small" style="margin-bottom:6px">Landline number</div><input id="bulkLandline"></div>
-      <div><div class="small" style="margin-bottom:6px">Email address</div><input id="bulkEmail"></div>
-      <div><div class="small" style="margin-bottom:6px">Probability</div><input id="bulkProbability" placeholder="Leave blank to keep unchanged"></div>
-      <div><div class="small" style="margin-bottom:6px">Sales status</div><select id="bulkSold"><option value="">No change</option><option value="true">Mark as sold</option><option value="false">Mark as not sold</option></select></div>
+      <div><div class="small" style="margin-bottom:6px">Probability</div><div class="pct-wrap"><input id="bulkProbability" oninput="formatPctInput(this)"><span class="pct-suffix">%</span></div></div>
     </div>
     <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn" onclick="closeBulkEditModal()">Cancel</button><button class="btn btn-primary" onclick="applyBulkEdit()">Apply to selected contacts</button></div>
   </div>
 </div>
 
-
-<div id="soldDetailsModal" class="modal hidden">
-  <div class="card modal-card" style="max-width:700px">
-    <div class="topbar" style="margin-bottom:18px"><div class="title"><h1 style="font-size:32px">Sold contact details</h1><p>Complete these details before moving the contact into Existing Customers.</p></div><div class="toolbar"><button class="btn btn-ghost" onclick="closeSoldDetailsModal()">Close</button></div></div>
-    <div class="form-grid">
-      <div><div class="small" style="margin-bottom:6px">Next action date</div><input id="soldNextAction" type="date" onclick="this.showPicker && this.showPicker()"></div>
-      <div><div class="small" style="margin-bottom:6px">Website URL</div><input id="soldWebsiteUrl" placeholder="https://example.com"></div>
-      <div><div class="small" style="margin-bottom:6px">Subscription</div><select id="soldSubscription"><option value="">Select subscription</option><option value="£0 No care">£0 No care</option><option value="£4.99 Basic care">£4.99 Basic care</option><option value="£9.99 standard care">£9.99 standard care</option><option value="£11.99 Standard care with domain">£11.99 Standard care with domain</option></select></div>
+<div id="duplicateModal" class="modal hidden">
+  <div class="card modal-card" style="max-width:760px">
+    <div class="topbar" style="margin-bottom:18px"><div class="title"><h1 style="font-size:32px">Possible duplicate found</h1><p>We found an existing business with the same business name, email or number.</p></div><div class="toolbar"><button class="btn btn-ghost" onclick="closeDuplicateModal()">Close</button></div></div>
+    <div class="notice">Choose what you want to do with this contact.</div>
+    <ul id="duplicateList" class="dupe-list"></ul>
+    <div class="dupe-actions">
+      <button class="btn" onclick="confirmDuplicateAction('still_save')">Still save</button>
+      <button class="btn btn-gold" onclick="confirmDuplicateAction('replace_existing')">Replace existing contact</button>
+      <button class="btn btn-danger" onclick="closeDuplicateModal()">Do not save</button>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn" onclick="closeSoldDetailsModal()">Cancel</button><button class="btn btn-primary" onclick="confirmSoldDetailsAndSave()">Save sold contact</button></div>
   </div>
 </div>
 
 <script>
-const SUBSCRIPTION_OPTIONS=['£0 No care','£4.99 Basic care','£9.99 standard care','£11.99 Standard care with domain'];
-let state={currentPage:'contacts',selectedId:null,selectedIds:[],contacts:[],templates:[]}, editingId=null, editingTemplateId=null, columnFilters={}, pendingContactPayload=null;
-function getActiveContactsPage(){return state.currentPage==='customers' ? 'customers' : 'contacts';}
-function isSoldContact(c){return !!c?.sold;}
-function normalizeWebsiteUrl(url=''){const v=String(url||'').trim();if(!v) return '';if(/^https?:\/\//i.test(v)) return v;return 'https://' + v;}
-function subscriptionLabel(v=''){return String(v||'').trim()||'—';}
-function parseProbabilityValue(value){const str=String(value||'').trim();const match=str.match(/-?\d+(\.\d+)?/);return match?Number(match[0]):null;}
+let state={currentPage:'contacts',selectedId:null,selectedIds:[],contacts:[],templates:[]}, columnFilters={}, editingTemplateId=null, pendingDuplicatePayload=null, duplicateCandidates=[];
+
 function setStatus(msg){const el=document.getElementById('saveStatus'); if(el) el.textContent=msg;}
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function sanitizePhone(p=''){return String(p).replace(/[^\d+]/g,'');}
+function normalizePhoneUK(p=''){let x=String(p||'').trim().replace(/[^\d+]/g,''); if(!x) return ''; if(x.startsWith('+44')) x='0'+x.slice(3); else if(x.startsWith('44') && x.length>=12) x='0'+x.slice(2); return x.replace(/[^\d]/g,'');}
+function normalizeBusinessName(v=''){return String(v).trim().toLowerCase().replace(/[^\w\s]/g,'').replace(/\s+/g,' ').trim();}
+function normalizeEmail(v=''){return String(v).trim().toLowerCase();}
+function cleanPercent(v=''){const digits=String(v).replace(/[^\d]/g,''); if(!digits) return ''; const num=Math.max(0,Math.min(100,Number(digits))); return String(Math.round(num));}
+function formatPercent(v=''){const c=cleanPercent(v); return c?`${c}%`:'—';}
+function formatPctInput(el){el.value=cleanPercent(el.value);}
 function formatDateTimeUK(iso){if(!iso)return "—";const d=new Date(iso);return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}, ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
 function formatDateOnlyUK(v){if(!v)return "—";const d=new Date(v+"T00:00:00");return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;}
 function getContact(){return state.contacts.find(c=>c.id===state.selectedId)||null;}
-function lastActionDate(c){const notes=(c.notes||[]).slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));return notes[0]?.createdAt||'';}
-async function api(path, options={}){const res=await fetch(path,{headers:{'Content-Type':'application/json',...(options.headers||{})},...options});let data={};try{data=await res.json()}catch{} if(!res.ok) throw new Error(data.error||'Request failed'); return data;}
-async function boot(){try{await api('/api/me');document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');await loadData();}catch{document.getElementById('loginView').classList.remove('hidden');document.getElementById('appView').classList.add('hidden');}}
-async function login(){try{await api('/api/login',{method:'POST',body:JSON.stringify({username:document.getElementById('loginUser').value.trim(),password:document.getElementById('loginPass').value})});document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');await loadData();}catch(e){alert(e.message);}}
+function lastActionDate(c){const notes=(c.notes||[]).filter(n=>['whatsapp','sms','email','call'].includes(n.type)).slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));return notes[0]?.createdAt||'';}
+async function api(path, options={}){const res=await fetch(path,{headers:{'Content-Type':'application/json',...(options.headers||{})},...options});let data={};try{data=await res.json()}catch{} if(!res.ok){const err=new Error(data.error||'Request failed'); err.data=data; err.status=res.status; throw err;} return data;}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
+function setPage(page,e){state.currentPage=page;document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));document.getElementById(`page-${page}`).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));if(e&&e.currentTarget)e.currentTarget.classList.add('active');else{const map={contacts:0,existing:1,templates:2,settings:3}; const btns=document.querySelectorAll('.navbtn'); if(page==='account'&&btns[0]) btns[0].classList.add('active'); else if(btns[map[page]]) btns[map[page]].classList.add('active');}closeSidebar();renderApp();}
+async function login(){try{await api('/api/login',{method:'POST',body:JSON.stringify({username:document.getElementById('loginUser').value,password:document.getElementById('loginPass').value})});document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');await loadData();}catch(e){alert(e.message)}}
 async function logout(){await api('/api/logout',{method:'POST'});location.reload();}
-async function loadData(){setStatus('Syncing...');const data=await api('/api/data');state.contacts=data.contacts||[];state.templates=data.templates||[];state.selectedIds=state.selectedIds.filter(id=>state.contacts.some(c=>c.id===id));if(state.selectedId && !state.contacts.some(c=>c.id===state.selectedId)) state.selectedId=null; renderApp(); setStatus('Connected.');}
-function renderApp(){const pageToShow=state.currentPage==='customers'?'contacts':state.currentPage;document.querySelectorAll("[id^='page-']").forEach(el=>el.classList.add("hidden"));document.getElementById("page-"+pageToShow).classList.remove("hidden");const navs=document.querySelectorAll(".navbtn");navs.forEach(b=>b.classList.remove("active"));if(state.currentPage==="contacts"||state.currentPage==="account")navs[0]?.classList.add("active");if(state.currentPage==="customers")navs[1]?.classList.add("active");if(state.currentPage==="templates")navs[2]?.classList.add("active");if(state.currentPage==="settings")navs[3]?.classList.add("active");const pageTitle=document.getElementById('contactsPageTitle');const pageSubtitle=document.getElementById('contactsPageSubtitle');if(pageTitle) pageTitle.textContent=state.currentPage==='customers'?'Existing Customers':'Contacts';if(pageSubtitle) pageSubtitle.textContent=state.currentPage==='customers'?'Sold contacts and their notes.':'Live sync CRM across devices.';renderStats();renderContactsTable();renderAccountPage();renderTemplatesPage();renderTemplateSelect();updateSelectedCount();}
-function renderStats(){let wa=0,email=0,other=0;state.contacts.forEach(c=>(c.notes||[]).forEach(n=>{if(n.type==="whatsapp")wa++;else if(n.type==="email")email++;else other++;}));document.getElementById("statContacts").textContent=state.contacts.length;document.getElementById("statWA").textContent=wa;document.getElementById("statEmail").textContent=email;document.getElementById("statOther").textContent=other;}
-function getVisibleColumns(){const inCustomers=getActiveContactsPage()==='customers';return {select:document.getElementById("colSelect").checked,business:document.getElementById("colBusiness").checked,mainContact:document.getElementById("colMainContact").checked,number:document.getElementById("colNumber").checked,email:document.getElementById("colEmail").checked,probability:document.getElementById("colProbability").checked,subscription:inCustomers,lastAction:document.getElementById("colLastAction").checked,nextAction:document.getElementById("colNextAction").checked};}
-function getColumnConfig(){const cols=[{key:'select',label:'',filter:false},{key:'business',label:'Business name',sortField:'businessName'},{key:'mainContact',label:'Main contact',sortField:'mainContact'},{key:'number',label:'Number',sortField:'number'},{key:'email',label:'Email address',sortField:'email'},{key:'probability',label:'Probability',sortField:'probability'}];if(getActiveContactsPage()==='customers') cols.push({key:'subscription',label:'Subscription',sortField:'subscription'});cols.push({key:'lastAction',label:'Last action date',sortField:'lastAction',dateFilter:true},{key:'nextAction',label:'Next action date',sortField:'nextActionDate',dateFilter:true});return cols;}
+async function boot(){try{await api('/api/me');document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');await loadData();}catch{}}
+async function loadData(){const data=await api('/api/data');state.contacts=data.contacts||[];state.templates=data.templates||[];renderApp();}
+function renderStats(){let wa=0,email=0,other=0;state.contacts.forEach(c=>(c.notes||[]).forEach(n=>{if(n.type==='whatsapp')wa++; else if(n.type==='email')email++; else if(n.type==='sms'||n.type==='call')other++;}));document.getElementById('statContacts').textContent=state.contacts.length;document.getElementById('statWA').textContent=wa;document.getElementById('statEmail').textContent=email;document.getElementById('statOther').textContent=other;}
+function getVisibleColumns(){return {select:document.getElementById('colSelect').checked,business:document.getElementById('colBusiness').checked,mainContact:document.getElementById('colMainContact').checked,number:document.getElementById('colNumber').checked,email:document.getElementById('colEmail').checked,probability:document.getElementById('colProbability').checked,lastAction:document.getElementById('colLastAction').checked,nextAction:document.getElementById('colNextAction').checked};}
+function getColumnConfig(){return [
+  {key:'select',label:''},
+  {key:'business',label:'Business name',sortField:'businessName'},
+  {key:'mainContact',label:'Main contact',sortField:'mainContact'},
+  {key:'number',label:'Number',sortField:'number'},
+  {key:'email',label:'Email',sortField:'email'},
+  {key:'probability',label:'Probability',sortField:'probability',probabilityFilter:true},
+  {key:'lastAction',label:'Last action',sortField:'lastAction',dateFilter:true},
+  {key:'nextAction',label:'Next action date',sortField:'nextActionDate',dateFilter:true}
+];}
+function toggleHeaderMenu(key){document.querySelectorAll('.header-menu').forEach(el=>{if(el.dataset.key!==key) el.classList.add('hidden');});const menu=document.querySelector(`.header-menu[data-key="${key}"]`);if(menu) menu.classList.toggle('hidden');}
+document.addEventListener('click',e=>{if(!e.target.closest('.header-menu')&&!e.target.closest('.header-menu-btn')) document.querySelectorAll('.header-menu').forEach(el=>el.classList.add('hidden'));});
 function setSort(field,direction){columnFilters.sortField=field;columnFilters.sortDirection=direction;renderContactsTable();}
-function setDateFilter(field,value){columnFilters[field]=value;renderContactsTable();}
-function clearFilters(){columnFilters={};renderContactsTable();}
-function toggleHeaderMenu(key){document.querySelectorAll('.header-menu').forEach(el=>{if(el.dataset.key!==key) el.classList.add('hidden');});const el=document.querySelector(`.header-menu[data-key="${key}"]`);if(el) el.classList.toggle('hidden');}
-document.addEventListener('click',(e)=>{if(!e.target.closest('.header-menu') && !e.target.closest('.header-menu-btn')) document.querySelectorAll('.header-menu').forEach(el=>el.classList.add('hidden'));});
-function getFilteredSortedRows(){const q=(document.getElementById("searchInput")?.value||"").trim().toLowerCase();let rows=state.contacts.filter(c=>{const inCurrentTab=getActiveContactsPage()==='customers'?isSoldContact(c):!isSoldContact(c);if(!inCurrentTab) return false;return [c.businessName,c.mainContact,c.mobile,c.landline,c.email,c.probability,c.subscription,c.websiteUrl].join(" " ).toLowerCase().includes(q);});const lf=columnFilters.lastActionFilter||'all', nf=columnFilters.nextActionFilter||'all';if(lf==='missing') rows=rows.filter(c=>!lastActionDate(c));if(lf==='present') rows=rows.filter(c=>!!lastActionDate(c));if(nf==='missing') rows=rows.filter(c=>!c.nextActionDate);if(nf==='present') rows=rows.filter(c=>!!c.nextActionDate);const sf=columnFilters.sortField||'businessName', sd=columnFilters.sortDirection||'asc';rows.sort((a,b)=>{let av="",bv="";if(sf==="businessName"){av=a.businessName||"";bv=b.businessName||"";}else if(sf==="mainContact"){av=a.mainContact||"";bv=b.mainContact||"";}else if(sf==="number"){av=a.mobile||a.landline||"";bv=b.mobile||b.landline||"";}else if(sf==="email"){av=a.email||"";bv=b.email||"";}else if(sf==="probability"){av=a.probability||"";bv=b.probability||"";}else if(sf==="subscription"){av=a.subscription||"";bv=b.subscription||"";}else if(sf==="lastAction"){av=lastActionDate(a)||"";bv=lastActionDate(b)||"";}else{av=a.nextActionDate||"";bv=b.nextActionDate||"";}if(sf==="lastAction"||sf==="nextActionDate"){const at=av?new Date(av).getTime():-Infinity, bt=bv?new Date(bv).getTime():-Infinity; return sd==='asc'?at-bt:bt-at;}if(sf==="number") return sd==='asc'?String(av).localeCompare(String(bv),undefined,{numeric:true}):String(bv).localeCompare(String(av),undefined,{numeric:true});if(sf==="probability"){const an=parseProbabilityValue(av), bn=parseProbabilityValue(bv);if(an!==null && bn!==null) return sd==='asc'?an-bn:bn-an;}return sd==='asc'?String(av).localeCompare(String(bv),undefined,{numeric:true,sensitivity:'base'}):String(bv).localeCompare(String(av),undefined,{numeric:true,sensitivity:'base'});});return rows;}
-function renderContactsTable(){const tbody=document.getElementById("contactsTable"), thead=document.getElementById("contactsHead"), empty=document.getElementById("contactsEmpty"), cols=getVisibleColumns();tbody.innerHTML=""; thead.innerHTML="";getColumnConfig().forEach(col=>{if(!cols[col.key]) return;const th=document.createElement('th');if(col.key==='select'){th.innerHTML=''; thead.appendChild(th); return;}let filterMenu='';if(col.sortField){filterMenu += `<div class="header-menu hidden" data-key="${col.key}"><div class="menu-title">Sort</div><button class="menu-btn" onclick="setSort('${col.sortField}','asc')">Ascending</button><button class="menu-btn" onclick="setSort('${col.sortField}','desc')">Descending</button>`;if(col.dateFilter){const fieldName=col.key==='lastAction' ? 'lastActionFilter' : 'nextActionFilter';filterMenu += `<div class="menu-sep"></div><div class="menu-title">Filter</div><button class="menu-btn" onclick="setDateFilter('${fieldName}','all')">Show all</button><button class="menu-btn" onclick="setDateFilter('${fieldName}','missing')">Only blanks</button><button class="menu-btn" onclick="setDateFilter('${fieldName}','present')">Only filled</button>`;}filterMenu += `</div>`;}th.innerHTML = `<div class="header-cell"><span>${col.label}</span><button class="header-menu-btn" onclick="toggleHeaderMenu('${col.key}')">▾</button></div>${filterMenu}`;thead.appendChild(th);});const rows=getFilteredSortedRows();empty.classList.toggle("hidden",rows.length>0);rows.forEach(c=>{const tr=document.createElement("tr"); let h="";if(cols.select) h+=`<td><input type="checkbox" ${state.selectedIds.includes(c.id)?'checked':''} onchange="toggleSelect('${c.id}', this.checked)"></td>`;if(cols.business) h+=`<td><a class="name-link" onclick="openAccount('${c.id}')">${escapeHtml(c.businessName||"—")}</a></td>`;if(cols.mainContact) h+=`<td>${escapeHtml(c.mainContact||"—")}</td>`;if(cols.number) h+=`<td>${escapeHtml(c.mobile||c.landline||"—")}</td>`;if(cols.email) h+=`<td>${escapeHtml(c.email||"—")}</td>`;if(cols.probability) h+=`<td>${escapeHtml(c.probability||"—")}</td>`;if(cols.subscription) h+=`<td>${escapeHtml(subscriptionLabel(c.subscription))}</td>`;if(cols.lastAction) h+=`<td>${escapeHtml(formatDateTimeUK(lastActionDate(c)))}</td>`;if(cols.nextAction) h+=`<td>${escapeHtml(formatDateOnlyUK(c.nextActionDate))}</td>`;tr.innerHTML=h; tbody.appendChild(tr);});updateSelectedCount();}
-function updateSelectedCount(){const el=document.getElementById("selectedCountLabel"); if(el) el.textContent=`${state.selectedIds.length} selected`;}
-function toggleSelect(id,checked){if(checked){if(!state.selectedIds.includes(id))state.selectedIds.push(id);}else{state.selectedIds=state.selectedIds.filter(x=>x!==id);}updateSelectedCount();}
-function toggleSelectAll(){const rows=getFilteredSortedRows().map(c=>c.id);const allSelected=rows.length>0&&rows.every(id=>state.selectedIds.includes(id));if(allSelected){state.selectedIds=state.selectedIds.filter(id=>!rows.includes(id));}else{rows.forEach(id=>{if(!state.selectedIds.includes(id))state.selectedIds.push(id);});}renderContactsTable();}
-function openBulkEditModal(){if(!state.selectedIds.length)return alert("Select at least one contact first.");["bulkNextAction","bulkMain","bulkMobile","bulkLandline","bulkEmail","bulkProbability"].forEach(id=>document.getElementById(id).value="");document.getElementById("bulkSold").value="";document.getElementById("bulkEditModal").classList.remove("hidden");}
-function closeBulkEditModal(){document.getElementById("bulkEditModal").classList.add("hidden");}
-async function applyBulkEdit(){if(!state.selectedIds.length)return;const soldValue=document.getElementById("bulkSold").value;const payload={ids:state.selectedIds,nextActionDate:document.getElementById("bulkNextAction").value,mainContact:document.getElementById("bulkMain").value.trim(),mobile:document.getElementById("bulkMobile").value.trim(),landline:document.getElementById("bulkLandline").value.trim(),email:document.getElementById("bulkEmail").value.trim(),probability:document.getElementById("bulkProbability").value.trim(),sold:soldValue===''?null:(soldValue==='true')};try{setStatus('Saving bulk edit...');const data=await api('/api/bulk-edit',{method:'POST',body:JSON.stringify(payload)});state.contacts=data.contacts||state.contacts;state.selectedIds=[];closeBulkEditModal();renderApp();setStatus('Bulk edit saved.');}catch(e){alert(e.message);setStatus('Error saving.');}}
-async function bulkDelete(){if(!state.selectedIds.length)return alert("Select at least one contact first.");if(!confirm(`Delete ${state.selectedIds.length} selected contact(s)?`))return;try{setStatus('Deleting...');const data=await api('/api/bulk-delete',{method:'POST',body:JSON.stringify({ids:state.selectedIds})});state.contacts=data.contacts||[];state.selectedIds=[];state.selectedId=null;renderApp();setStatus('Deleted.');}catch(e){alert(e.message);}}
-function setPage(page,ev=null){state.currentPage=page;renderApp();if(ev){document.querySelectorAll(".navbtn").forEach(b=>b.classList.remove("active"));ev.currentTarget.classList.add("active");}closeSidebar();}
-function openAccount(id){state.selectedId=id;state.currentPage="account";renderApp();}
-function backToList(){const c=getContact();state.currentPage=isSoldContact(c)?'customers':'contacts';renderApp();}
-function setText(id,v){document.getElementById(id).textContent=v;}
-function setLink(id,url,label){const el=document.getElementById(id);if(url)el.innerHTML=`<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`;else el.textContent="—";}
-function renderAccountPage(){const c=getContact();if(!c){document.getElementById("accountTitle").textContent="Account";document.getElementById("notesList").innerHTML=`<div class="small">Select a contact from the contacts page.</div>`;["dBusiness","dMain","dMobile","dLandline","dEmail","dProbability","dSold","dSubscription","dWebsiteUrl","dNextAction","dInstagram","dFacebook","dTikTok","dX"].forEach(id=>document.getElementById(id).textContent="—");document.getElementById("nextActionInput").value="";return;}document.getElementById("accountTitle").textContent=c.businessName||"Account";setText("dBusiness",c.businessName||"—"); setText("dMain",c.mainContact||"—"); setText("dMobile",c.mobile||"—"); setText("dLandline",c.landline||"—"); setText("dEmail",c.email||"—"); setText("dProbability",c.probability||"—"); setText("dSold",isSoldContact(c)?"Sold":"Active lead"); setText("dSubscription",subscriptionLabel(c.subscription)); setLink("dWebsiteUrl",c.websiteUrl,"Open website"); setText("dNextAction",formatDateOnlyUK(c.nextActionDate));setLink("dInstagram",c.instagram,"Instagram"); setLink("dFacebook",c.facebook,"Facebook"); setLink("dTikTok",c.tiktok,"TikTok"); setLink("dX",c.x,"X");document.getElementById("nextActionInput").value=c.nextActionDate||"";const list=document.getElementById("notesList"); list.innerHTML="";const notes=(c.notes||[]).slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));if(!notes.length) list.innerHTML=`<div class="small">No notes yet.</div>`;else notes.forEach(n=>{let label="Note added";if(n.type==="whatsapp")label="WhatsApp sent";else if(n.type==="sms")label="SMS sent";else if(n.type==="email")label="Email sent";else if(n.type==="call")label="Call logged";const div=document.createElement("div");div.className="note";div.innerHTML=`<div class="note-meta">${escapeHtml(label)} · ${escapeHtml(formatDateTimeUK(n.createdAt))}</div><div>${escapeHtml(n.text||"")}</div>`;list.appendChild(div);});}
-function renderTemplateSelect(){const sel=document.getElementById('templateSelect');if(!sel) return;sel.innerHTML = '<option value="">Choose template</option>' + state.templates.map(t=>`<option value="${escapeHtml(t.id)}">${escapeHtml(t.name)}</option>`).join('');}
-function applyTemplate(){const c=getContact();const sel=document.getElementById('templateSelect'); if(!sel || !c) return;const tpl=state.templates.find(t=>t.id===sel.value); if(!tpl) return;let val=(tpl.body||'').replaceAll('{{businessName}}',c.businessName||'').replaceAll('{{mainContact}}',c.mainContact||'');document.getElementById('messageBox').value=val;}
-function renderTemplatesPage(){const wrap=document.getElementById('templatesList'); if(!wrap) return;wrap.innerHTML = '';if(!state.templates.length){wrap.innerHTML = '<div class="card page-card"><div class="small">No templates yet.</div></div>'; return;}state.templates.forEach(t=>{const div=document.createElement('div'); div.className='template-item';div.innerHTML = `<div><div class="template-name">${escapeHtml(t.name)}</div><div class="template-body">${escapeHtml(t.body||'')}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onclick="editTemplate('${t.id}')">Edit</button><button class="btn btn-danger" onclick="deleteTemplate('${t.id}')">Delete</button></div>`;wrap.appendChild(div);});}
-function clearTemplateEditor(){editingTemplateId=null; document.getElementById('tplName').value=''; document.getElementById('tplBody').value='';}
-function editTemplate(id){const t=state.templates.find(x=>x.id===id); if(!t) return; editingTemplateId=id; document.getElementById('tplName').value=t.name||''; document.getElementById('tplBody').value=t.body||''; setPage('templates'); window.scrollTo({top:0, behavior:'smooth'});}
-async function saveTemplate(){const name=document.getElementById('tplName').value.trim(), body=document.getElementById('tplBody').value.trim(); if(!name || !body) return alert('Please add a name and template text.'); try{const data=await api('/api/template-save',{method:'POST',body:JSON.stringify({id:editingTemplateId,name,body})}); state.templates=data.templates||state.templates; clearTemplateEditor(); renderApp(); setStatus('Template saved.');}catch(e){alert(e.message);}}
-async function deleteTemplate(id){if(!confirm('Delete this template?')) return; try{const data=await api('/api/template-delete',{method:'POST',body:JSON.stringify({id})}); state.templates=data.templates||state.templates; renderApp(); setStatus('Template deleted.');}catch(e){alert(e.message);}}
-function openContactModal(edit=false){const c=edit?getContact():null;editingId=edit&&c?c.id:null;document.getElementById("modalTitle").textContent=edit?"Edit contact":"Add new contact";document.getElementById("fBusiness").value=c?.businessName||"";document.getElementById("fMain").value=c?.mainContact||"";document.getElementById("fMobile").value=c?.mobile||"";document.getElementById("fLandline").value=c?.landline||"";document.getElementById("fEmail").value=c?.email||"";document.getElementById("fProbability").value=c?.probability||"";document.getElementById("fNextAction").value=c?.nextActionDate||"";document.getElementById("fSold").checked=!!c?.sold;document.getElementById("fWebsiteUrl").value=c?.websiteUrl||"";document.getElementById("fSubscription").value=c?.subscription||"";document.getElementById("fInstagram").value=c?.instagram||"";document.getElementById("fFacebook").value=c?.facebook||"";document.getElementById("fTikTok").value=c?.tiktok||"";document.getElementById("fX").value=c?.x||"";document.getElementById("contactModal").classList.remove("hidden");}
-function closeContactModal(){document.getElementById("contactModal").classList.add("hidden");}
-function buildContactPayloadFromForm(){return {id:editingId,businessName:document.getElementById("fBusiness").value.trim(),mainContact:document.getElementById("fMain").value.trim(),mobile:document.getElementById("fMobile").value.trim(),landline:document.getElementById("fLandline").value.trim(),email:document.getElementById("fEmail").value.trim(),probability:document.getElementById("fProbability").value.trim(),sold:document.getElementById("fSold").checked,nextActionDate:document.getElementById("fNextAction").value,websiteUrl:normalizeWebsiteUrl(document.getElementById("fWebsiteUrl").value.trim()),subscription:document.getElementById("fSubscription").value,instagram:document.getElementById("fInstagram").value.trim(),facebook:document.getElementById("fFacebook").value.trim(),tiktok:document.getElementById("fTikTok").value.trim(),x:document.getElementById("fX").value.trim()};}
-function openSoldDetailsModal(payload){pendingContactPayload=payload;document.getElementById("soldNextAction").value=payload.nextActionDate||'';document.getElementById("soldWebsiteUrl").value=payload.websiteUrl||'';document.getElementById("soldSubscription").value=payload.subscription||'';document.getElementById("soldDetailsModal").classList.remove('hidden');}
-function closeSoldDetailsModal(){pendingContactPayload=null;document.getElementById("soldDetailsModal").classList.add('hidden');}
-async function submitContactPayload(payload){try{setStatus('Saving contact...');const data=await api('/api/contact-save',{method:'POST',body:JSON.stringify(payload)});state.contacts=data.contacts||state.contacts;state.selectedId=data.selectedId||state.selectedId;closeSoldDetailsModal();closeContactModal();state.currentPage=payload.sold?'customers':'contacts';renderApp();setStatus('Saved.');}catch(e){alert(e.message);setStatus('Error saving.');}}
-function confirmSoldDetailsAndSave(){if(!pendingContactPayload) return;pendingContactPayload.nextActionDate=document.getElementById("soldNextAction").value;pendingContactPayload.websiteUrl=normalizeWebsiteUrl(document.getElementById("soldWebsiteUrl").value.trim());pendingContactPayload.subscription=document.getElementById("soldSubscription").value;if(!pendingContactPayload.nextActionDate) return alert('Please choose the next action date.');if(!pendingContactPayload.websiteUrl) return alert('Please add the website URL.');if(!pendingContactPayload.subscription) return alert('Please choose a subscription.');document.getElementById("fNextAction").value=pendingContactPayload.nextActionDate;document.getElementById("fWebsiteUrl").value=pendingContactPayload.websiteUrl;document.getElementById("fSubscription").value=pendingContactPayload.subscription;submitContactPayload(pendingContactPayload);}
-async function saveContact(){const payload=buildContactPayloadFromForm();if(!payload.businessName)return alert("Business name is required.");const current=getContact();const becomingSold=payload.sold && !current?.sold;const missingSoldDetails=payload.sold && (!payload.nextActionDate || !payload.websiteUrl || !payload.subscription);if(becomingSold || missingSoldDetails){openSoldDetailsModal(payload);return;}submitContactPayload(payload);}
-async function deleteCurrentContact(){const c=getContact();if(!c)return;if(!confirm(`Delete ${c.businessName}?`))return;try{setStatus('Deleting...');const data=await api('/api/contact-delete',{method:'POST',body:JSON.stringify({id:c.id})});state.contacts=data.contacts||[];state.selectedId=null;state.currentPage='contacts';renderApp();setStatus('Deleted.');}catch(e){alert(e.message);}}
-async function saveNextActionDate(){const c=getContact();if(!c)return;try{const data=await api('/api/bulk-edit',{method:'POST',body:JSON.stringify({ids:[c.id],nextActionDate:document.getElementById("nextActionInput").value})});state.contacts=data.contacts||state.contacts;renderApp();setStatus('Next action date saved.');}catch(e){alert(e.message);}}
-async function addFreeNote(){const c=getContact();const txt=document.getElementById("messageBox").value.trim();if(!c)return alert("Open a contact first.");if(!txt)return alert("Type a note first.");try{const data=await api('/api/note-add',{method:'POST',body:JSON.stringify({id:c.id,text:txt,type:'note'})});state.contacts=data.contacts||state.contacts;document.getElementById("messageBox").value="";renderApp();setStatus('Note saved.');}catch(e){alert(e.message);}}
-async function sendLog(type){const c=getContact(); if(!c) return alert("Open a contact first.");const typed=document.getElementById("messageBox").value.trim();const logText = type==='call' ? `Call made to ${c.mobile||c.landline||'saved number'}.` : (typed || 'Message sent');try{const data=await api('/api/note-add',{method:'POST',body:JSON.stringify({id:c.id,text:logText,type})});state.contacts=data.contacts||state.contacts; renderApp(); setStatus('Activity logged.');if(type==='whatsapp') window.open(`https://wa.me/${sanitizePhone(c.mobile)}?text=${encodeURIComponent(typed || '')}`,"_blank");if(type==='sms') window.location.href=`sms:${sanitizePhone(c.mobile)}?body=${encodeURIComponent(typed || '')}`;if(type==='email') window.location.href=`mailto:${encodeURIComponent(c.email)}?subject=${encodeURIComponent("Quick enquiry")}&body=${encodeURIComponent(typed || '')}`;if(type==='call') window.location.href=`tel:${sanitizePhone(c.mobile||c.landline)}`;}catch(e){alert(e.message);}}
+function setDateFilter(field,val){columnFilters[field]=val;renderContactsTable();}
+function setProbabilityFilter(val){columnFilters.probabilityFilter=val;renderContactsTable();}
+function getFilteredSortedRows(contacts=state.contacts){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  let rows=contacts.filter(c=>[c.businessName,c.mainContact,c.mobile,c.landline,c.email].join(' ').toLowerCase().includes(q));
+  if(columnFilters.lastActionFilter==='missing') rows=rows.filter(c=>!lastActionDate(c));
+  if(columnFilters.lastActionFilter==='present') rows=rows.filter(c=>!!lastActionDate(c));
+  if(columnFilters.nextActionFilter==='missing') rows=rows.filter(c=>!c.nextActionDate);
+  if(columnFilters.nextActionFilter==='present') rows=rows.filter(c=>!!c.nextActionDate);
+  if(columnFilters.probabilityFilter && columnFilters.probabilityFilter!=='all') rows=rows.filter(c=>(c.probability||'')===columnFilters.probabilityFilter);
+  const sf=columnFilters.sortField||'businessName', sd=columnFilters.sortDirection||'asc';
+  rows.sort((a,b)=>{
+    let av='', bv='';
+    if(sf==='businessName'){av=a.businessName||''; bv=b.businessName||'';}
+    else if(sf==='mainContact'){av=a.mainContact||''; bv=b.mainContact||'';}
+    else if(sf==='number'){av=a.mobile||a.landline||''; bv=b.mobile||b.landline||'';}
+    else if(sf==='email'){av=a.email||''; bv=b.email||'';}
+    else if(sf==='probability'){av=Number(a.probability||-1); bv=Number(b.probability||-1); return sd==='asc'?av-bv:bv-av;}
+    else if(sf==='lastAction'){av=lastActionDate(a)||''; bv=lastActionDate(b)||'';}
+    else {av=a.nextActionDate||''; bv=b.nextActionDate||'';}
+    if(sf==='lastAction'||sf==='nextActionDate'){const at=av?new Date(av).getTime():-Infinity, bt=bv?new Date(bv).getTime():-Infinity; return sd==='asc'?at-bt:bt-at;}
+    return sd==='asc'?String(av).localeCompare(String(bv),undefined,{numeric:true}):String(bv).localeCompare(String(av),undefined,{numeric:true});
+  });
+  return rows;
+}
+function renderContactsTable(){
+  const tbody=document.getElementById('contactsTable'), thead=document.getElementById('contactsHead'), empty=document.getElementById('contactsEmpty'), cols=getVisibleColumns();
+  tbody.innerHTML=''; thead.innerHTML='';
+  const probValues=[...new Set(state.contacts.map(c=>c.probability).filter(Boolean))].sort((a,b)=>Number(a)-Number(b));
+  getColumnConfig().forEach(col=>{
+    if(!cols[col.key]) return;
+    const th=document.createElement('th');
+    if(col.key==='select'){thead.appendChild(th); return;}
+    let menu='';
+    menu += `<div class="header-menu hidden" data-key="${col.key}"><div class="menu-title">Sort</div><button class="menu-btn" onclick="setSort('${col.sortField}','asc')">Ascending</button><button class="menu-btn" onclick="setSort('${col.sortField}','desc')">Descending</button>`;
+    if(col.probabilityFilter){
+      menu += `<div class="menu-sep"></div><div class="menu-title">Filter</div><button class="menu-btn" onclick="setProbabilityFilter('all')">Show all</button>` + probValues.map(v=>`<button class="menu-btn" onclick="setProbabilityFilter('${v}')">${escapeHtml(v)}%</button>`).join('');
+    }
+    if(col.dateFilter){
+      const fieldName=col.key==='lastAction'?'lastActionFilter':'nextActionFilter';
+      menu += `<div class="menu-sep"></div><div class="menu-title">Filter</div><button class="menu-btn" onclick="setDateFilter('${fieldName}','all')">Show all</button><button class="menu-btn" onclick="setDateFilter('${fieldName}','missing')">Only blanks</button><button class="menu-btn" onclick="setDateFilter('${fieldName}','present')">Only filled</button>`;
+    }
+    menu += `</div>`;
+    th.innerHTML=`<div class="header-cell"><span>${col.label}</span><button class="header-menu-btn" onclick="toggleHeaderMenu('${col.key}')">▾</button></div>${menu}`;
+    thead.appendChild(th);
+  });
+  const rows=getFilteredSortedRows();
+  empty.classList.toggle('hidden',rows.length>0);
+  rows.forEach(c=>{
+    const tr=document.createElement('tr');
+    let h='';
+    if(cols.select) h+=`<td><input type="checkbox" ${state.selectedIds.includes(c.id)?'checked':''} onchange="toggleSelect('${c.id}',this.checked)"></td>`;
+    if(cols.business) h+=`<td><a class="name-link" onclick="openAccount('${c.id}')">${escapeHtml(c.businessName||'—')}</a></td>`;
+    if(cols.mainContact) h+=`<td>${escapeHtml(c.mainContact||'—')}</td>`;
+    if(cols.number) h+=`<td>${escapeHtml(c.mobile||c.landline||'—')}</td>`;
+    if(cols.email) h+=`<td>${escapeHtml(c.email||'—')}</td>`;
+    if(cols.probability) h+=`<td>${escapeHtml(formatPercent(c.probability))}</td>`;
+    if(cols.lastAction) h+=`<td>${escapeHtml(formatDateTimeUK(lastActionDate(c)))}</td>`;
+    if(cols.nextAction) h+=`<td>${escapeHtml(formatDateOnlyUK(c.nextActionDate))}</td>`;
+    tr.innerHTML=h; tbody.appendChild(tr);
+  });
+  document.getElementById('selectedCountLabel').textContent=`${state.selectedIds.length} selected`;
+}
+function renderExistingCustomers(){
+  const tbody=document.getElementById('existingTable'); tbody.innerHTML='';
+  state.contacts.filter(c=>c.saleConfirmed||c.subscription).sort((a,b)=>String(a.businessName).localeCompare(String(b.businessName))).forEach(c=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><a class="name-link" onclick="openAccount('${c.id}')">${escapeHtml(c.businessName)}</a></td><td>${escapeHtml(c.mainContact||'—')}</td><td>${escapeHtml(c.mobile||c.landline||'—')}</td><td>${escapeHtml(c.subscription||'—')}</td><td>${escapeHtml(c.websiteUrl||'—')}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+function renderTemplates(){
+  const sel=document.getElementById('templateSelect');
+  sel.innerHTML='<option value="">Choose template</option>'+state.templates.map(t=>`<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+  const list=document.getElementById('templatesList');
+  list.innerHTML=state.templates.map(t=>`<div class="template-item"><div><div class="template-name">${escapeHtml(t.name)}</div><div class="template-body">${escapeHtml(t.body)}</div></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" onclick="editTemplate('${t.id}')">Edit</button><button class="btn btn-danger" onclick="deleteTemplate('${t.id}')">Delete</button></div></div>`).join('') || '<div class="card page-card"><div class="small">No templates yet.</div></div>';
+}
+function renderAccountPage(){
+  const c=getContact();
+  if(!c){document.getElementById('accountTitle').textContent='Account'; return;}
+  document.getElementById('accountTitle').textContent=c.businessName||'Account';
+  document.getElementById('aBusiness').value=c.businessName||'';
+  document.getElementById('aMain').value=c.mainContact||'';
+  document.getElementById('aMobile').value=c.mobile||'';
+  document.getElementById('aLandline').value=c.landline||'';
+  document.getElementById('aEmail').value=c.email||'';
+  document.getElementById('aProbability').value=c.probability||'';
+  document.getElementById('aSalesStatus').value=c.salesStatus||'';
+  document.getElementById('aSubscription').value=c.subscription||'';
+  document.getElementById('aWebsite').value=c.websiteUrl||'';
+  document.getElementById('aNextAction').value=c.nextActionDate||'';
+  document.getElementById('aInstagram').value=c.instagram||'';
+  document.getElementById('aFacebook').value=c.facebook||'';
+  document.getElementById('aTikTok').value=c.tiktok||'';
+  document.getElementById('aX').value=c.x||'';
+  document.getElementById('aSold').checked=!!c.saleConfirmed;
+  const notes=(c.notes||[]).filter(n=>n.type==='note').slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  const list=document.getElementById('notesList');
+  list.innerHTML = notes.length ? notes.map(n=>`<div class="note"><div class="note-meta">Note added · ${escapeHtml(formatDateTimeUK(n.createdAt))}</div><div>${escapeHtml(n.text||'')}</div></div>`).join('') : '<div class="small">No notes yet.</div>';
+}
+function renderApp(){renderContactsTable(); renderStats(); renderExistingCustomers(); renderTemplates(); if(state.currentPage==='account') renderAccountPage();}
+function openContactModal(){['fBusiness','fMain','fMobile','fLandline','fEmail','fProbability','fNextAction','fWebsite','fInstagram','fFacebook','fTikTok','fX'].forEach(id=>document.getElementById(id).value=''); document.getElementById('fSubscription').value=''; document.getElementById('contactModal').classList.remove('hidden');}
+function closeContactModal(){document.getElementById('contactModal').classList.add('hidden');}
+function openBulkEditModal(){if(!state.selectedIds.length) return alert('Select at least one contact first.'); document.getElementById('bulkNextAction').value=''; document.getElementById('bulkProbability').value=''; document.getElementById('bulkEditModal').classList.remove('hidden');}
+function closeBulkEditModal(){document.getElementById('bulkEditModal').classList.add('hidden');}
+function toggleSelect(id,checked){if(checked){if(!state.selectedIds.includes(id)) state.selectedIds.push(id);} else state.selectedIds=state.selectedIds.filter(x=>x!==id); renderContactsTable();}
+function toggleSelectAll(){const rows=getFilteredSortedRows().map(c=>c.id);const all=rows.length&&rows.every(id=>state.selectedIds.includes(id)); if(all) state.selectedIds=state.selectedIds.filter(id=>!rows.includes(id)); else rows.forEach(id=>{if(!state.selectedIds.includes(id)) state.selectedIds.push(id);}); renderContactsTable();}
+function openAccount(id){state.selectedId=id; state.currentPage='account'; setPage('account');}
+async function saveContact(payloadOverride=null){
+  const payload=payloadOverride||{
+    businessName:document.getElementById('fBusiness').value.trim(),
+    mainContact:document.getElementById('fMain').value.trim(),
+    mobile:document.getElementById('fMobile').value.trim(),
+    landline:document.getElementById('fLandline').value.trim(),
+    email:document.getElementById('fEmail').value.trim(),
+    probability:document.getElementById('fProbability').value.trim(),
+    nextActionDate:document.getElementById('fNextAction').value,
+    websiteUrl:document.getElementById('fWebsite').value.trim(),
+    subscription:document.getElementById('fSubscription').value,
+    instagram:document.getElementById('fInstagram').value.trim(),
+    facebook:document.getElementById('fFacebook').value.trim(),
+    tiktok:document.getElementById('fTikTok').value.trim(),
+    x:document.getElementById('fX').value.trim(),
+    salesStatus:'Active lead',
+    saleConfirmed:false
+  };
+  if(!payload.businessName) return alert('Business name is required.');
+  try{
+    const data=await api('/api/contact-save',{method:'POST',body:JSON.stringify(payload)});
+    state.contacts=data.contacts||state.contacts; state.selectedId=data.selectedId||state.selectedId; closeContactModal(); setStatus('Saved.'); renderApp();
+  }catch(e){
+    if(e.status===409 && e.data && e.data.duplicate){
+      pendingDuplicatePayload=payload; duplicateCandidates=e.data.duplicates||[]; showDuplicateModal();
+      return;
+    }
+    alert(e.message);
+  }
+}
+function showDuplicateModal(){
+  document.getElementById('duplicateList').innerHTML=duplicateCandidates.map(d=>`<li>${escapeHtml(d.businessName)}${d.mobile?` · ${escapeHtml(d.mobile)}`:''}${d.email?` · ${escapeHtml(d.email)}`:''}</li>`).join('');
+  document.getElementById('duplicateModal').classList.remove('hidden');
+}
+function closeDuplicateModal(){document.getElementById('duplicateModal').classList.add('hidden'); pendingDuplicatePayload=null; duplicateCandidates=[];}
+async function confirmDuplicateAction(action){
+  if(!pendingDuplicatePayload) return;
+  const payload={...pendingDuplicatePayload, duplicateAction:action};
+  if(action==='replace_existing') payload.replaceId=(duplicateCandidates[0]||{}).id||'';
+  closeDuplicateModal();
+  await saveContact(payload);
+}
+async function saveCurrentContact(){
+  const c=getContact(); if(!c) return;
+  const payload={
+    id:c.id,
+    businessName:document.getElementById('aBusiness').value.trim(),
+    mainContact:document.getElementById('aMain').value.trim(),
+    mobile:document.getElementById('aMobile').value.trim(),
+    landline:document.getElementById('aLandline').value.trim(),
+    email:document.getElementById('aEmail').value.trim(),
+    probability:document.getElementById('aProbability').value.trim(),
+    salesStatus:document.getElementById('aSalesStatus').value.trim(),
+    saleConfirmed:document.getElementById('aSold').checked,
+    subscription:document.getElementById('aSubscription').value,
+    websiteUrl:document.getElementById('aWebsite').value.trim(),
+    nextActionDate:document.getElementById('aNextAction').value,
+    instagram:document.getElementById('aInstagram').value.trim(),
+    facebook:document.getElementById('aFacebook').value.trim(),
+    tiktok:document.getElementById('aTikTok').value.trim(),
+    x:document.getElementById('aX').value.trim()
+  };
+  const data=await api('/api/contact-save',{method:'POST',body:JSON.stringify(payload)});
+  state.contacts=data.contacts||state.contacts; state.selectedId=data.selectedId||state.selectedId; setStatus('Saved changes.'); renderAccountPage(); renderContactsTable(); renderExistingCustomers(); renderStats();
+}
+async function deleteCurrentContact(){const c=getContact(); if(!c) return; if(!confirm(`Delete ${c.businessName}?`)) return; const data=await api('/api/contact-delete',{method:'POST',body:JSON.stringify({id:c.id})}); state.contacts=data.contacts||[]; state.selectedId=null; setPage('contacts'); setStatus('Deleted.');}
+async function addFreeNote(){const c=getContact(); const txt=document.getElementById('messageBox').value.trim(); if(!c) return alert('Open a contact first.'); if(!txt) return alert('Type a note first.'); const data=await api('/api/note-add',{method:'POST',body:JSON.stringify({id:c.id,text:txt,type:'note'})}); state.contacts=data.contacts||state.contacts; document.getElementById('messageBox').value=''; renderAccountPage(); renderStats(); setStatus('Note saved.');}
+async function sendLog(type){
+  const c=getContact(); if(!c) return alert('Open a contact first.');
+  const typed=document.getElementById('messageBox').value.trim();
+  const logText=typed || 'Message sent';
+  const data=await api('/api/note-add',{method:'POST',body:JSON.stringify({id:c.id,text:logText,type})});
+  state.contacts=data.contacts||state.contacts; renderStats(); setStatus('Activity logged.');
+  if(type==='whatsapp') window.open(`https://wa.me/${sanitizePhone(c.mobile)}?text=${encodeURIComponent(typed || '')}`,"_blank");
+  if(type==='sms') window.location.href=`sms:${sanitizePhone(c.mobile)}?body=${encodeURIComponent(typed || '')}`;
+  if(type==='email') window.location.href=`mailto:${encodeURIComponent(c.email)}?subject=${encodeURIComponent("Quick enquiry")}&body=${encodeURIComponent(typed || '')}`;
+  if(type==='call') window.location.href=`tel:${sanitizePhone(c.mobile||c.landline)}`;
+}
+async function applyBulkEdit(){const body={ids:state.selectedIds,nextActionDate:document.getElementById('bulkNextAction').value,probability:document.getElementById('bulkProbability').value.trim()}; const data=await api('/api/bulk-edit',{method:'POST',body:JSON.stringify(body)}); state.contacts=data.contacts||state.contacts; closeBulkEditModal(); renderApp(); setStatus('Bulk edit saved.');}
+async function bulkDelete(){if(!state.selectedIds.length) return alert('Select at least one contact first.'); if(!confirm(`Delete ${state.selectedIds.length} selected contact(s)?`)) return; const data=await api('/api/bulk-delete',{method:'POST',body:JSON.stringify({ids:state.selectedIds})}); state.contacts=data.contacts||[]; state.selectedIds=[]; renderApp(); setStatus('Deleted.');}
 function parseCsvLine(line){const result=[];let cur='',inQuotes=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch=='"'){if(inQuotes&&line[i+1]=='"'){cur+='"';i++;}else inQuotes=!inQuotes;}else if(ch===','&&!inQuotes){result.push(cur.trim());cur='';}else cur+=ch;}result.push(cur.trim());return result.map(v=>v.replace(/^"|"$/g,'').trim());}
 function normalizeHeader(h){return String(h||'').trim().toLowerCase().replace(/[._-]+/g,' ').replace(/\s+/g,' ');}
-function mapHeaderToField(h){const m={'business name':'businessName','business':'businessName','company':'businessName','company name':'businessName','main contact':'mainContact','contact':'mainContact','contact name':'mainContact','mobile number':'mobile','mobile':'mobile','phone':'mobile','number':'mobile','landline number':'landline','landline':'landline','email address':'email','email':'email','next action date':'nextActionDate','probability':'probability','chance':'probability','sale probability':'probability','sold':'sold','sale yes':'sold','sales toggle':'sold','website url':'websiteUrl','website':'websiteUrl','url':'websiteUrl','subscription':'subscription','instagram':'instagram','facebook':'facebook','tiktok':'tiktok','x':'x'};return m[normalizeHeader(h)]||null;}
+function mapHeaderToField(h){const m={'business name':'businessName','business':'businessName','company':'businessName','company name':'businessName','main contact':'mainContact','contact':'mainContact','contact name':'mainContact','mobile number':'mobile','mobile':'mobile','phone':'mobile','number':'mobile','landline number':'landline','landline':'landline','email address':'email','email':'email','probability':'probability','next action date':'nextActionDate','website url':'websiteUrl','instagram':'instagram','facebook':'facebook','tiktok':'tiktok','x':'x'};return m[normalizeHeader(h)]||null;}
 function normalizeDateInput(v){const s=String(v||'').trim();if(!s)return '';if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;const m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){const day=String(m[1]).padStart(2,'0'),month=String(m[2]).padStart(2,'0');let year=m[3];if(year.length===2)year='20'+year;return `${year}-${month}-${day}`;}return '';}
-async function handleCsvUpload(event){const file=event.target.files&&event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=async function(e){try{const text=String(e.target.result||'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');const lines=text.split('\n').filter(line=>line.trim()!=='');if(lines.length<2){alert('CSV needs a header row and at least one contact row.');return;}const headers=parseCsvLine(lines[0]);const fieldMap=headers.map(mapHeaderToField);const contacts=[];for(let i=1;i<lines.length;i++){const cols=parseCsvLine(lines[i]);const row={businessName:'',mainContact:'',mobile:'',landline:'',email:'',probability:'',sold:false,nextActionDate:'',websiteUrl:'',subscription:'',instagram:'',facebook:'',tiktok:'',x:''};fieldMap.forEach((field,idx)=>{if(field)row[field]=(cols[idx]||'').trim();});row.nextActionDate=normalizeDateInput(row.nextActionDate);row.websiteUrl=normalizeWebsiteUrl(row.websiteUrl);row.sold=['true','yes','y','1','sold'].includes(String(row.sold||'').trim().toLowerCase());if(row.businessName||row.mainContact||row.mobile||row.landline||row.email) contacts.push(row);}setStatus('Uploading CSV...');const data=await api('/api/bulk-import',{method:'POST',body:JSON.stringify({contacts})});state.contacts=data.contacts||state.contacts;event.target.value='';renderApp();setStatus('CSV imported.');alert(`${contacts.length} contact${contacts.length===1?'':'s'} imported.`);}catch(err){alert('There was a problem reading that CSV file.');setStatus('Import failed.');}};reader.readAsText(file);}
-function downloadCsvTemplate(){const csv=['business name,main contact,mobile number,probability,landline number,email address,next action date,sold,website url,subscription','ABC TEST,Kris Sheridan,07759031302,75%,,krissheridan88@gmail.com,25/03/2026,no,https://example.com,£4.99 Basic care','BCD TEST,,078483939292,10%,,,,,,'].join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='crm-contact-template.csv';a.click();URL.revokeObjectURL(a.href);}
-function exportData(){const rows=state.contacts.map(c=>({businessName:c.businessName,mainContact:c.mainContact,mobile:c.mobile,landline:c.landline,email:c.email,probability:c.probability||'',sold:!!c.sold,websiteUrl:c.websiteUrl||'',subscription:c.subscription||'',lastActionDate:lastActionDate(c),nextActionDate:c.nextActionDate}));const blob=new Blob([JSON.stringify(rows,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='crm-export.json';a.click();URL.revokeObjectURL(a.href);}
-function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("overlay").classList.toggle("show");}
-function closeSidebar(){document.getElementById("sidebar").classList.remove("open");document.getElementById("overlay").classList.remove("show");}
+async function handleCsvUpload(event){const file=event.target.files&&event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=async function(e){try{const text=String(e.target.result||'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');const lines=text.split('\n').filter(line=>line.trim()!=='');if(lines.length<2){alert('CSV needs a header row and at least one contact row.');return;}const headers=parseCsvLine(lines[0]);const fieldMap=headers.map(mapHeaderToField);const contacts=[];for(let i=1;i<lines.length;i++){const cols=parseCsvLine(lines[i]);const row={businessName:'',mainContact:'',mobile:'',landline:'',email:'',probability:'',nextActionDate:'',websiteUrl:'',instagram:'',facebook:'',tiktok:'',x:''};fieldMap.forEach((field,idx)=>{if(field)row[field]=(cols[idx]||'').trim();});row.nextActionDate=normalizeDateInput(row.nextActionDate);if(row.businessName||row.mainContact||row.mobile||row.landline||row.email) contacts.push(row);}const data=await api('/api/bulk-import',{method:'POST',body:JSON.stringify({contacts})});state.contacts=data.contacts||state.contacts;event.target.value='';renderApp();setStatus('CSV imported.');alert(`${data.imported || 0} contact${(data.imported||0)===1?'':'s'} imported.`);}catch(err){alert('There was a problem reading that CSV file.');}};reader.readAsText(file);}
+function downloadCsvTemplate(){const csv=['business name,main contact,mobile number,landline number,email address,probability,next action date,website url,instagram,facebook,tiktok,x','ABC TEST,Kris Sheridan,07759031302,,krissheridan88@gmail.com,25,25/03/2026,https://example.com,,,,'].join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='crm-contact-template.csv';a.click();URL.revokeObjectURL(a.href);}
+function exportData(){const blob=new Blob([JSON.stringify(state.contacts,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='crm-export.json';a.click();URL.revokeObjectURL(a.href);}
+function applyTemplate(){const c=getContact(); const id=document.getElementById('templateSelect').value; const t=state.templates.find(x=>x.id===id); if(!t) return; document.getElementById('messageBox').value=t.body.replaceAll('{{businessName}}', c?.businessName || '').replaceAll('{{mainContact}}', c?.mainContact || '');}
+function editTemplate(id){const t=state.templates.find(x=>x.id===id); if(!t) return; editingTemplateId=id; document.getElementById('tplName').value=t.name; document.getElementById('tplBody').value=t.body; setPage('templates'); window.scrollTo({top:0,behavior:'smooth'});}
+function clearTemplateEditor(){editingTemplateId=null; document.getElementById('tplName').value=''; document.getElementById('tplBody').value='';}
+async function saveTemplate(){const name=document.getElementById('tplName').value.trim(), body=document.getElementById('tplBody').value.trim(); if(!name||!body) return alert('Template name and text are required.'); const data=await api('/api/template-save',{method:'POST',body:JSON.stringify({id:editingTemplateId,name,body})}); state.templates=data.templates||state.templates; clearTemplateEditor(); renderTemplates(); setStatus('Template saved.');}
+async function deleteTemplate(id){if(!confirm('Delete this template?')) return; const data=await api('/api/template-delete',{method:'POST',body:JSON.stringify({id})}); state.templates=data.templates||state.templates; renderTemplates();}
 boot();
 </script>
 </body>
