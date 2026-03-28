@@ -1,4 +1,4 @@
-import { bad, json, requireAuth, getData, saveData, addNote } from "./_lib.mjs";
+import { bad, json, requireAuth, getData, saveData, normalizeProbability } from "./_lib.mjs";
 export default async (request) => {
   const auth=requireAuth(request); if(auth.error) return bad(auth.error, auth.status||401);
   if (request.method !== "POST") return bad("Method not allowed", 405);
@@ -7,17 +7,15 @@ export default async (request) => {
   const data = await getData();
   for (const c of data.contacts) {
     if (!ids.includes(c.id)) continue;
-    let changed = false;
-    if (body.nextActionDate) { c.nextActionDate = String(body.nextActionDate).trim(); changed = true; }
-    if (body.mainContact) { c.mainContact = String(body.mainContact).trim(); changed = true; }
-    if (body.mobile) { c.mobile = String(body.mobile).trim(); changed = true; }
-    if (body.landline) { c.landline = String(body.landline).trim(); changed = true; }
-    if (body.email) { c.email = String(body.email).trim(); changed = true; }
-    if (body.probability !== undefined && body.probability !== "") { c.probability = String(body.probability).trim(); changed = true; }
-    if (body.websiteUrl !== undefined && body.websiteUrl !== "") { c.websiteUrl = String(body.websiteUrl).trim(); changed = true; }
-    if (body.subscription !== undefined && body.subscription !== "") { c.subscription = String(body.subscription).trim(); changed = true; }
-    if (body.sold !== undefined && body.sold !== null) { c.sold = !!body.sold; changed = true; }
-    if (changed) addNote(c, "note", "Bulk edit applied.");
+    if (body.nextActionDate) c.nextActionDate = String(body.nextActionDate).trim();
+    if (body.mainContact) c.mainContact = String(body.mainContact).trim();
+    if (body.mobile) c.mobile = String(body.mobile).trim();
+    if (body.landline) c.landline = String(body.landline).trim();
+    if (body.email) c.email = String(body.email).trim();
+    if (body.probability !== undefined && body.probability !== "") c.probability = normalizeProbability(body.probability);
+    if (body.websiteUrl !== undefined && body.websiteUrl !== "") c.websiteUrl = String(body.websiteUrl).trim();
+    if (body.subscription !== undefined && body.subscription !== "") c.subscription = String(body.subscription).trim();
+    if (body.sold !== undefined && body.sold !== null && body.sold !== "") c.sold = String(body.sold) === 'true' || body.sold === true;
   }
   await saveData(data);
   return json({ contacts: data.contacts, templates: data.templates, updated: ids.length });
