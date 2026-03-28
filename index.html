@@ -333,7 +333,7 @@ function getFilteredSortedRows(contacts=state.contacts){
   if(columnFilters.lastActionFilter==='present') rows=rows.filter(c=>!!lastActionDate(c));
   if(columnFilters.nextActionFilter==='missing') rows=rows.filter(c=>!c.nextActionDate);
   if(columnFilters.nextActionFilter==='present') rows=rows.filter(c=>!!c.nextActionDate);
-  if(columnFilters.probabilityFilter && columnFilters.probabilityFilter!=='all') rows=rows.filter(c=>(c.probability||'')===columnFilters.probabilityFilter);
+  if(columnFilters.probabilityFilter && columnFilters.probabilityFilter!=='all') rows=rows.filter(c=>cleanPercent(c.probability||'')===cleanPercent(columnFilters.probabilityFilter));
   const sf=columnFilters.sortField||'businessName', sd=columnFilters.sortDirection||'asc';
   rows.sort((a,b)=>{
     let av='', bv='';
@@ -352,7 +352,7 @@ function getFilteredSortedRows(contacts=state.contacts){
 function renderContactsTable(){
   const tbody=document.getElementById('contactsTable'), thead=document.getElementById('contactsHead'), empty=document.getElementById('contactsEmpty'), cols=getVisibleColumns();
   tbody.innerHTML=''; thead.innerHTML='';
-  const probValues=[...new Set(state.contacts.map(c=>c.probability).filter(Boolean))].sort((a,b)=>Number(a)-Number(b));
+  const probValues=[...new Set(state.contacts.map(c=>cleanPercent(c.probability)).filter(Boolean))].sort((a,b)=>Number(a)-Number(b));
   getColumnConfig().forEach(col=>{
     if(!cols[col.key]) return;
     const th=document.createElement('th');
