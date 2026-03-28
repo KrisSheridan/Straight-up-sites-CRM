@@ -44,6 +44,27 @@ export function requireAuth(request) {
   return { session };
 }
 export function newId() { return crypto.randomUUID(); }
+export function normalizeProbability(value='') {
+  const str = String(value ?? '').trim().replace(/%+/g,'');
+  if (!str) return '';
+  const match = str.match(/-?\d+(\.\d+)?/);
+  if (!match) return '';
+  const num = Math.max(0, Math.min(100, Math.round(Number(match[0]))));
+  return `${num}%`;
+}
+export function normalizeUkPhone(value='') {
+  let raw = String(value ?? '').trim();
+  if (!raw) return '';
+  let digits = raw.replace(/[^\d+]/g,'');
+  if (digits.startsWith('+44')) digits = '0' + digits.slice(3);
+  else if (digits.startsWith('44') && digits.length >= 12) digits = '0' + digits.slice(2);
+  digits = digits.replace(/\D/g,'');
+  if (digits.length === 10 && !digits.startsWith('0')) digits = '0' + digits;
+  return digits;
+}
+export function normalizeName(value='') { return String(value ?? '').trim().toLowerCase().replace(/\s+/g,' '); }
+export function normalizeEmail(value='') { return String(value ?? '').trim().toLowerCase(); }
+export function isCustomerContact(contact={}) { return !!(contact?.sold || String(contact?.subscription || '').trim()); }
 export function addNote(contact, type, text) {
   contact.notes ||= [];
   contact.notes.push({ id: newId(), type, text, createdAt: new Date().toISOString() });
@@ -56,7 +77,7 @@ export function normalizeContact(input = {}) {
     mobile: String(input.mobile || "").trim(),
     landline: String(input.landline || "").trim(),
     email: String(input.email || "").trim(),
-    probability: String(input.probability || "").trim(),
+    probability: normalizeProbability(input.probability),
     sold: !!input.sold,
     nextActionDate: String(input.nextActionDate || "").trim(),
     websiteUrl: String(input.websiteUrl || "").trim(),
@@ -67,6 +88,19 @@ export function normalizeContact(input = {}) {
     x: String(input.x || "").trim(),
     notes: Array.isArray(input.notes) ? input.notes : [],
   };
+}
+export function findDuplicateContact(contacts = [], input = {}, ignoreId = '') {
+  const targetName = normalizeName(input.businessName);
+  const targetEmail = normalizeEmail(input.email);
+  const targetPhones = [normalizeUkPhone(input.mobile), normalizeUkPhone(input.landline)].filter(Boolean);
+  return contacts.find(c => {
+    if (ignoreId && c.id === ignoreId) return false;
+    const nameMatch = !!targetName && normalizeName(c.businessName) === targetName;
+    const emailMatch = !!targetEmail && normalizeEmail(c.email) === targetEmail;
+    const existingPhones = [normalizeUkPhone(c.mobile), normalizeUkPhone(c.landline)].filter(Boolean);
+    const phoneMatch = targetPhones.some(p => existingPhones.includes(p));
+    return nameMatch || emailMatch || phoneMatch;
+  }) || null;
 }
 export function normalizeTemplate(input = {}) {
   return {
