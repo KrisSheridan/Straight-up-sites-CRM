@@ -1,14 +1,20 @@
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
+
 const STORE_NAME = "straight-up-sites-crm";
 const DATA_KEY = "crm-data-v2";
+
 export function json(body, status = 200, headers = {}) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { "content-type": "application/json; charset=utf-8", ...headers },
   });
 }
-export function bad(message, status = 400) { return json({ error: message }, status); }
+
+export function bad(message, status = 400) {
+  return json({ error: message }, status);
+}
+
 export function getCookie(request, name) {
   const cookie = request.headers.get("cookie") || "";
   const parts = cookie.split(/;\s*/);
@@ -18,12 +24,17 @@ export function getCookie(request, name) {
   }
   return "";
 }
-function sign(value, secret) { return crypto.createHmac("sha256", secret).update(value).digest("base64url"); }
+
+function sign(value, secret) {
+  return crypto.createHmac("sha256", secret).update(value).digest("base64url");
+}
+
 export function makeSession(username, secret) {
   const exp = Date.now() + 1000 * 60 * 60 * 24 * 30;
   const payload = `${username}|${exp}`;
   return Buffer.from(`${payload}|${sign(payload, secret)}`).toString("base64url");
 }
+
 export function verifySession(token, secret) {
   try {
     const raw = Buffer.from(token, "base64url").toString("utf8");
@@ -33,8 +44,11 @@ export function verifySession(token, secret) {
     if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return null;
     if (Date.now() > Number(expStr)) return null;
     return { username };
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
+
 export function requireAuth(request) {
   const secret = process.env.SESSION_SECRET || "";
   if (!secret) return { error: "SESSION_SECRET is not set." };
@@ -43,32 +57,95 @@ export function requireAuth(request) {
   if (!session) return { error: "Unauthorized", status: 401 };
   return { session };
 }
-export function newId() { return crypto.randomUUID(); }
-export function normalizeProbability(value='') {
-  const str = String(value ?? '').trim().replace(/%+/g,'');
-  if (!str) return '';
+
+export function newId() {
+  return crypto.randomUUID();
+}
+
+export function normalizeProbability(value = "") {
+  const str = String(value ?? "").trim().replace(/%+/g, "");
+  if (!str) return "";
   const match = str.match(/-?\d+(\.\d+)?/);
-  if (!match) return '';
+  if (!match) return "";
   const num = Math.max(0, Math.min(100, Math.round(Number(match[0]))));
   return `${num}%`;
 }
-export function normalizeUkPhone(value='') {
-  let raw = String(value ?? '').trim();
-  if (!raw) return '';
-  let digits = raw.replace(/[^\d+]/g,'');
-  if (digits.startsWith('+44')) digits = '0' + digits.slice(3);
-  else if (digits.startsWith('44') && digits.length >= 12) digits = '0' + digits.slice(2);
-  digits = digits.replace(/\D/g,'');
-  if (digits.length === 10 && !digits.startsWith('0')) digits = '0' + digits;
+
+export function normalizeUkPhone(value = "") {
+  let raw = String(value ?? "").trim();
+  if (!raw) return "";
+
+  let digits = raw.replace(/[^\d+]/g, "");
+
+  if (digits.startsWith("0044")) digits = "0" + digits.slice(4);
+  else if (digits.startsWith("+44")) digits = "0" + digits.slice(3);
+  else if (digits.startsWith("44") && digits.length >= 12) digits = "0" + digits.slice(2);
+
+  digits = digits.replace(/\D/g, "");
+
+  if (digits.length === 10 && !digits.startsWith("0")) digits = "0" + digits;
+  if (digits.length > 11 && digits.startsWith("00")) digits = digits.replace(/^0+/, "0");
+
   return digits;
 }
-export function normalizeName(value='') { return String(value ?? '').trim().toLowerCase().replace(/\s+/g,' '); }
-export function normalizeEmail(value='') { return String(value ?? '').trim().toLowerCase(); }
-export function isCustomerContact(contact={}) { return !!(contact?.sold || String(contact?.subscription || '').trim()); }
+
+function normalizeNameTokens(value = "") {
+  const cleaned = String(value ?? "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/['’]/g, "")
+    .replace(/\blimited\b/g, " ltd ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const rawTokens = cleaned ? cleaned.split(" ") : [];
+  const tokens = [];
+
+  let initials = [];
+  const flushInitials = () => {
+    if (initials.length) {
+      tokens.push(initials.join(""));
+      initials = [];
+    }
+  };
+
+  for (const token of rawTokens) {
+    if (!token) continue;
+    if (token.length === 1 && /^[a-z0-9]$/.test(token)) {
+      initials.push(token);
+      continue;
+    }
+    flushInitials();
+    tokens.push(token);
+  }
+  flushInitials();
+
+  return tokens;
+}
+
+export function normalizeName(value = "") {
+  return normalizeNameTokens(value).join(" ");
+}
+
+export function normalizeEmail(value = "") {
+  return String(value ?? "").trim().toLowerCase();
+}
+
+export function isCustomerContact(contact = {}) {
+  return !!(contact?.sold || String(contact?.subscription || "").trim());
+}
+
 export function addNote(contact, type, text) {
   contact.notes ||= [];
-  contact.notes.push({ id: newId(), type, text, createdAt: new Date().toISOString() });
+  contact.notes.push({
+    id: newId(),
+    type,
+    text,
+    createdAt: new Date().toISOString(),
+  });
 }
+
 export function normalizeContact(input = {}) {
   return {
     id: input.id || newId(),
@@ -89,19 +166,36 @@ export function normalizeContact(input = {}) {
     notes: Array.isArray(input.notes) ? input.notes : [],
   };
 }
-export function findDuplicateContact(contacts = [], input = {}, ignoreId = '') {
+
+export function summarizeDuplicate(contact = {}) {
+  return {
+    id: contact.id,
+    businessName: contact.businessName || "",
+    mobile: contact.mobile || "",
+    landline: contact.landline || "",
+    email: contact.email || "",
+  };
+}
+
+export function findDuplicateContact(contacts = [], input = {}, ignoreId = "") {
   const targetName = normalizeName(input.businessName);
   const targetEmail = normalizeEmail(input.email);
   const targetPhones = [normalizeUkPhone(input.mobile), normalizeUkPhone(input.landline)].filter(Boolean);
-  return contacts.find(c => {
-    if (ignoreId && c.id === ignoreId) return false;
-    const nameMatch = !!targetName && normalizeName(c.businessName) === targetName;
-    const emailMatch = !!targetEmail && normalizeEmail(c.email) === targetEmail;
-    const existingPhones = [normalizeUkPhone(c.mobile), normalizeUkPhone(c.landline)].filter(Boolean);
-    const phoneMatch = targetPhones.some(p => existingPhones.includes(p));
-    return nameMatch || emailMatch || phoneMatch;
-  }) || null;
+
+  return (
+    contacts.find((c) => {
+      if (ignoreId && c.id === ignoreId) return false;
+
+      const nameMatch = !!targetName && normalizeName(c.businessName) === targetName;
+      const emailMatch = !!targetEmail && normalizeEmail(c.email) === targetEmail;
+      const existingPhones = [normalizeUkPhone(c.mobile), normalizeUkPhone(c.landline)].filter(Boolean);
+      const phoneMatch = targetPhones.some((p) => existingPhones.includes(p));
+
+      return nameMatch || emailMatch || phoneMatch;
+    }) || null
+  );
 }
+
 export function normalizeTemplate(input = {}) {
   return {
     id: input.id || newId(),
@@ -109,26 +203,47 @@ export function normalizeTemplate(input = {}) {
     body: String(input.body || "").trim(),
   };
 }
+
 export async function getData() {
   const store = getStore(STORE_NAME);
   const current = await store.get(DATA_KEY, { type: "json" });
+
   if (current && Array.isArray(current.contacts)) {
     current.templates ||= [
-      { id: newId(), name: "Website intro", body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?" },
-      { id: newId(), name: "Follow-up", body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}." }
+      {
+        id: newId(),
+        name: "Website intro",
+        body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?",
+      },
+      {
+        id: newId(),
+        name: "Follow-up",
+        body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}.",
+      },
     ];
     return current;
   }
+
   const seed = {
     contacts: [],
     templates: [
-      { id: newId(), name: "Website intro", body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?" },
-      { id: newId(), name: "Follow-up", body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}." }
-    ]
+      {
+        id: newId(),
+        name: "Website intro",
+        body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?",
+      },
+      {
+        id: newId(),
+        name: "Follow-up",
+        body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}.",
+      },
+    ],
   };
+
   await saveData(seed);
   return seed;
 }
+
 export async function saveData(data) {
   const store = getStore(STORE_NAME);
   await store.setJSON(DATA_KEY, data);
