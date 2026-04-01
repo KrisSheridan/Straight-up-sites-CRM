@@ -74,58 +74,23 @@ export function normalizeProbability(value = "") {
 export function normalizeUkPhone(value = "") {
   let raw = String(value ?? "").trim();
   if (!raw) return "";
-
   let digits = raw.replace(/[^\d+]/g, "");
-
-  if (digits.startsWith("0044")) digits = "0" + digits.slice(4);
-  else if (digits.startsWith("+44")) digits = "0" + digits.slice(3);
+  if (digits.startsWith("+44")) digits = "0" + digits.slice(3);
   else if (digits.startsWith("44") && digits.length >= 12) digits = "0" + digits.slice(2);
-
   digits = digits.replace(/\D/g, "");
-
   if (digits.length === 10 && !digits.startsWith("0")) digits = "0" + digits;
-  if (digits.length > 11 && digits.startsWith("00")) digits = digits.replace(/^0+/, "0");
-
   return digits;
 }
 
-function normalizeNameTokens(value = "") {
-  const cleaned = String(value ?? "")
+export function normalizeName(value = "") {
+  return String(value ?? "")
     .toLowerCase()
+    .trim()
     .replace(/&/g, " and ")
-    .replace(/['’]/g, "")
     .replace(/\blimited\b/g, " ltd ")
     .replace(/[^a-z0-9]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-
-  const rawTokens = cleaned ? cleaned.split(" ") : [];
-  const tokens = [];
-
-  let initials = [];
-  const flushInitials = () => {
-    if (initials.length) {
-      tokens.push(initials.join(""));
-      initials = [];
-    }
-  };
-
-  for (const token of rawTokens) {
-    if (!token) continue;
-    if (token.length === 1 && /^[a-z0-9]$/.test(token)) {
-      initials.push(token);
-      continue;
-    }
-    flushInitials();
-    tokens.push(token);
-  }
-  flushInitials();
-
-  return tokens;
-}
-
-export function normalizeName(value = "") {
-  return normalizeNameTokens(value).join(" ");
 }
 
 export function normalizeEmail(value = "") {
@@ -138,12 +103,7 @@ export function isCustomerContact(contact = {}) {
 
 export function addNote(contact, type, text) {
   contact.notes ||= [];
-  contact.notes.push({
-    id: newId(),
-    type,
-    text,
-    createdAt: new Date().toISOString(),
-  });
+  contact.notes.push({ id: newId(), type, text, createdAt: new Date().toISOString() });
 }
 
 export function normalizeContact(input = {}) {
@@ -167,16 +127,6 @@ export function normalizeContact(input = {}) {
   };
 }
 
-export function summarizeDuplicate(contact = {}) {
-  return {
-    id: contact.id,
-    businessName: contact.businessName || "",
-    mobile: contact.mobile || "",
-    landline: contact.landline || "",
-    email: contact.email || "",
-  };
-}
-
 export function findDuplicateContact(contacts = [], input = {}, ignoreId = "") {
   const targetName = normalizeName(input.businessName);
   const targetEmail = normalizeEmail(input.email);
@@ -185,12 +135,10 @@ export function findDuplicateContact(contacts = [], input = {}, ignoreId = "") {
   return (
     contacts.find((c) => {
       if (ignoreId && c.id === ignoreId) return false;
-
       const nameMatch = !!targetName && normalizeName(c.businessName) === targetName;
       const emailMatch = !!targetEmail && normalizeEmail(c.email) === targetEmail;
       const existingPhones = [normalizeUkPhone(c.mobile), normalizeUkPhone(c.landline)].filter(Boolean);
       const phoneMatch = targetPhones.some((p) => existingPhones.includes(p));
-
       return nameMatch || emailMatch || phoneMatch;
     }) || null
   );
@@ -210,16 +158,8 @@ export async function getData() {
 
   if (current && Array.isArray(current.contacts)) {
     current.templates ||= [
-      {
-        id: newId(),
-        name: "Website intro",
-        body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?",
-      },
-      {
-        id: newId(),
-        name: "Follow-up",
-        body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}.",
-      },
+      { id: newId(), name: "Website intro", body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?" },
+      { id: newId(), name: "Follow-up", body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}." }
     ];
     return current;
   }
@@ -227,17 +167,9 @@ export async function getData() {
   const seed = {
     contacts: [],
     templates: [
-      {
-        id: newId(),
-        name: "Website intro",
-        body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?",
-      },
-      {
-        id: newId(),
-        name: "Follow-up",
-        body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}.",
-      },
-    ],
+      { id: newId(), name: "Website intro", body: "Hi {{businessName}}, I help businesses get a clean professional website. Would you like a free demo?" },
+      { id: newId(), name: "Follow-up", body: "Hi {{mainContact}}, just following up on my last message. Happy to put together a free website mock-up for {{businessName}}." }
+    ]
   };
 
   await saveData(seed);
