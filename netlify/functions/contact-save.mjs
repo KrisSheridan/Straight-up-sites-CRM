@@ -18,7 +18,27 @@ export default async (request) => {
   if (!String(body.businessName || "").trim()) return bad("Business name is required.");
 
   const data = await getData();
-  const duplicate = findDuplicateContact(data.contacts, body, body.id || "");
+
+  // Existing contact edits must always save by ID first.
+  // Duplicate checks are only for new contacts, otherwise existing duplicates
+  // can block normal edits like probability changes.
+  if (body.id) {
+    const idx = data.contacts.findIndex((c) => c.id === body.id);
+    if (idx === -1) return bad("Contact not found.", 404);
+
+    const existing = data.contacts[idx];
+    data.contacts[idx] = normalizeContact({
+      ...existing,
+      ...body,
+      id: existing.id,
+      notes: existing.notes,
+    });
+
+    await saveData(data);
+    return json({ contacts: data.contacts, templates: data.templates, selectedId: existing.id });
+  }
+
+  const duplicate = findDuplicateContact(data.contacts, body, "");
 
   if (duplicate && !body.duplicateAction) {
     return json(
@@ -31,28 +51,18 @@ export default async (request) => {
     );
   }
 
-  if (body.id) {
-    const idx = data.contacts.findIndex((c) => c.id === body.id);
-    if (idx === -1) return bad("Contact not found.", 404);
-
-    const existing = data.contacts[idx];
-    data.contacts[idx] = {
-      ...existing,
-      ...normalizeContact({ ...existing, ...body, notes: existing.notes }),
-    };
-    await saveData(data);
-    return json({ contacts: data.contacts, templates: data.templates, selectedId: body.id });
-  }
-
   if (duplicate && body.duplicateAction === "replace_existing") {
     const idx = data.contacts.findIndex((c) => c.id === (body.duplicateId || duplicate.id));
     if (idx === -1) return bad("Duplicate contact not found.", 404);
 
     const existing = data.contacts[idx];
-    data.contacts[idx] = {
+    data.contacts[idx] = normalizeContact({
       ...existing,
-      ...normalizeContact({ ...existing, ...body, id: existing.id, notes: existing.notes }),
-    };
+      ...body,
+      id: existing.id,
+      notes: existing.notes,
+    });
+
     await saveData(data);
     return json({ contacts: data.contacts, templates: data.templates, selectedId: existing.id });
   }
